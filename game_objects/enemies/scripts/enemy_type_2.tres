@@ -1,0 +1,109 @@
+[gd_resource type="BehaviorTree" load_steps=20 format=3 uid="uid://c2eu6taroq26"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_a0cys"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="BTAction" id="BTAction_ymdf1"]
+resource_local_to_scene = false
+resource_name = ""
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_ci0yu"]
+resource_local_to_scene = false
+resource_name = ""
+children = [SubResource("BTAction_ymdf1")]
+
+[sub_resource type="BBVariant" id="BBVariant_212wt"]
+resource_local_to_scene = false
+resource_name = "true"
+type = 1
+saved_value = true
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_ymdf1"]
+resource_local_to_scene = false
+resource_name = ""
+property = &"is_idle"
+value = SubResource("BBVariant_212wt")
+
+[sub_resource type="BTAction" id="BTAction_f4nn5"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="BTSequence" id="BTSequence_ci0yu"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "IdleStayPhase"
+children = [SubResource("BTCheckAgentProperty_ymdf1"), SubResource("BTAction_f4nn5")]
+
+[sub_resource type="BBVariant" id="BBVariant_ymdf1"]
+resource_local_to_scene = false
+resource_name = "true"
+type = 1
+saved_value = true
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_ci0yu"]
+resource_local_to_scene = false
+resource_name = ""
+property = &"is_can_shoot"
+value = SubResource("BBVariant_ymdf1")
+
+[sub_resource type="BTAction" id="BTAction_212wt"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="BBNode" id="BBNode_2nrj6"]
+resource_local_to_scene = false
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_qftv0"]
+resource_local_to_scene = false
+resource_name = ""
+node = SubResource("BBNode_2nrj6")
+method = &"is_idle_invert"
+
+[sub_resource type="BTSequence" id="BTSequence_yhyqd"]
+resource_local_to_scene = false
+resource_name = ""
+children = [SubResource("BTCheckAgentProperty_ci0yu"), SubResource("BTAction_212wt"), SubResource("BTCallMethod_qftv0")]
+
+[sub_resource type="BTAction" id="BTAction_i8don"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="BTSequence" id="BTSequence_jy5ja"]
+resource_local_to_scene = false
+resource_name = ""
+children = [SubResource("BTAction_i8don")]
+
+[sub_resource type="BTParallel" id="BTParallel_meyws"]
+resource_local_to_scene = false
+resource_name = ""
+children = [SubResource("BTSequence_yhyqd"), SubResource("BTSequence_jy5ja")]
+
+[sub_resource type="BTSequence" id="BTSequence_ymdf1"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "Simple Shot"
+children = [SubResource("BTParallel_meyws")]
+metadata/_weight_ = 99.0
+
+[sub_resource type="BTSequence" id="BTSequence_37e0u"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "CombatPhase"
+children = [SubResource("BTSequence_ymdf1")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_ijrmc"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "Root"
+children = [SubResource("BTRunLimit_ci0yu"), SubResource("BTSequence_ci0yu"), SubResource("BTSequence_37e0u")]
+
+[resource]
+resource_local_to_scene = false
+resource_name = ""
+blackboard_plan = SubResource("BlackboardPlan_a0cys")
+root_task = SubResource("BTDynamicSelector_ijrmc")

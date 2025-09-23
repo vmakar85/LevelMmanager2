@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://p5sj6148u3ad"]
+
+[ext_resource type="Script" uid="uid://cdkinanshe6qn" path="res://test_obj/c.gd" id="1_yofsk"]
+[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://test_obj/ray_component/rays.tscn" id="2_tg2at"]
+
+[sub_resource type="Gradient" id="Gradient_5l7g4"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(0.901235, 0.901235, 0.901235, 1, 0, 0, 0, 1, 1, 1, 1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yofsk"]
+gradient = SubResource("Gradient_5l7g4")
+
+[node name="C" type="Node2D"]
+script = ExtResource("1_yofsk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_yofsk")
+
+[node name="Rays" parent="." instance=ExtResource("2_tg2at")]

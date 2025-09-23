@@ -1,0 +1,563 @@
+[gd_scene load_steps=12 format=3 uid="uid://buv5dbgp55put"]
+
+[ext_resource type="Script" uid="uid://dmwfoldm2rbqh" path="res://scripts/ui/ui_root.gd" id="1_mm7js"]
+[ext_resource type="Texture2D" uid="uid://rm8el386nhdu" path="res://ui_elements/crosshair042.png" id="2_e676h"]
+[ext_resource type="Texture2D" uid="uid://bdeq381pl8bmi" path="res://ui_elements/enemies/enemy_sprites/spaceShips_007_d.png" id="3_lyy6b"]
+[ext_resource type="Script" uid="uid://tvju8mm3o38g" path="res://scripts/ui/grid_editor.gd" id="4_8eikv"]
+[ext_resource type="Script" uid="uid://bjblt33a7cfl1" path="res://scripts/ui/standart_symbols_container.gd" id="5_4x5tb"]
+[ext_resource type="Script" uid="uid://baoblnlnvqifm" path="res://scripts/ui/extended_symbols_container.gd" id="6_ea5ug"]
+[ext_resource type="Script" uid="uid://enfihuxjtjxw" path="res://scripts/ui/enemy_editor.gd" id="7_m8mft"]
+[ext_resource type="Texture2D" uid="uid://diw1mohtu5gxl" path="res://ui_elements/enemies/enemy_sprites/spaceShips_001_d.png" id="8_t7vtc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.803922)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_0xm2m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.2, 0.2, 0.2, 0.941176)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[node name="UIRoot" type="CanvasLayer"]
+script = ExtResource("1_mm7js")
+
+[node name="left" type="MarginContainer" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 200.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="left"]
+layout_mode = 2
+
+[node name="infoPanel" type="Panel" parent="left/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(3.465, 43.04)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="MarginContainer" type="MarginContainer" parent="left/VBoxContainer/infoPanel"]
+clip_contents = true
+layout_mode = 0
+offset_top = 4.0
+offset_right = 200.0
+offset_bottom = 14.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="left/VBoxContainer/infoPanel/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_0xm2m")
+
+[node name="lvlNameLabel" type="Label" parent="left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "Map_name"
+autowrap_mode = 3
+
+[node name="movement_speed" type="Label" parent="left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "movement_speed"
+autowrap_mode = 3
+
+[node name="shift_down_speed" type="Label" parent="left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "shift_down_speed"
+autowrap_mode = 3
+
+[node name="start_y" type="Label" parent="left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "start_y"
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="left/VBoxContainer"]
+layout_mode = 2
+
+[node name="ControllPanel" type="Panel" parent="left/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(3.465, 43.04)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="MarginContainer" type="MarginContainer" parent="left/VBoxContainer/ControllPanel"]
+clip_contents = true
+layout_mode = 0
+offset_top = 4.0
+offset_right = 200.0
+offset_bottom = 14.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_0xm2m")
+
+[node name="CheckButton" type="CheckButton" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Move formation"
+
+[node name="PanelContainer" type="PanelContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="movement_speed_control_lable" type="Label" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Side Speed : "
+
+[node name="movement_speed_slider" type="HSlider" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="down_movement_speed_control_lable" type="Label" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Down Speed : "
+
+[node name="down_movement_speed_slider" type="HSlider" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+step = 0.5
+
+[node name="PanelContainer3" type="PanelContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="Edit formation" type="Button" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Edit formation"
+icon = ExtResource("2_e676h")
+expand_icon = true
+
+[node name="PanelContainer4" type="PanelContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="Edit enemies" type="Button" parent="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4/VBoxContainer"]
+layout_mode = 2
+text = "Edit enemies"
+icon = ExtResource("3_lyy6b")
+expand_icon = true
+
+[node name="right" type="MarginContainer" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="right"]
+layout_mode = 2
+
+[node name="CenterGridEditor" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(880, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("4_8eikv")
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="CenterGridEditor"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="GridEditor" type="VBoxContainer" parent="CenterGridEditor/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 870.0
+offset_bottom = 590.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterGridEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterGridEditor/Panel/GridEditor/MarginContainer"]
+layout_mode = 2
+
+[node name="AddRowButton" type="Button" parent="CenterGridEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "AddRow"
+
+[node name="AddFilledRowButton" type="Button" parent="CenterGridEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "AddFilledRowButton"
+
+[node name="RefreshButton" type="Button" parent="CenterGridEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh"
+
+[node name="GridContainer" type="GridContainer" parent="CenterGridEditor/Panel/GridEditor"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainerSymbol" type="MarginContainer" parent="CenterGridEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterGridEditor/Panel/GridEditor/MarginContainerSymbol"]
+layout_mode = 2
+
+[node name="StandartSymbolsContainer" type="HBoxContainer" parent="CenterGridEditor/Panel/GridEditor/MarginContainerSymbol/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 5
+script = ExtResource("5_4x5tb")
+
+[node name="ExtendedSymbolsContainer" type="HBoxContainer" parent="CenterGridEditor/Panel/GridEditor/MarginContainerSymbol/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("6_ea5ug")
+
+[node name="MarginContainerRow" type="MarginContainer" parent="CenterGridEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterGridEditor/Panel/GridEditor/MarginContainerRow"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="RowControlsContainer" type="VBoxContainer" parent="CenterGridEditor/Panel/GridEditor/MarginContainerRow/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CenterEnemyEditor" type="MarginContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(880, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("7_m8mft")
+
+[node name="Panel" type="Panel" parent="CenterEnemyEditor"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="MainTabContainer" type="TabContainer" parent="CenterEnemyEditor/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="SharpShotTest" type="TabBar" parent="CenterEnemyEditor/Panel/MainTabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer"]
+layout_mode = 2
+
+[node name="Pic" type="MarginContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Pic"]
+layout_mode = 2
+texture = ExtResource("8_t7vtc")
+
+[node name="Description" type="MarginContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BaseHealthLabel" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+text = "BaseHealthLabel : 10"
+
+[node name="BasePointsLabel" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+text = "BasePointsLabel : 10"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Editor symbol:"
+
+[node name="LableSymble" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="EditControll" type="MarginContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/EditControll"]
+layout_mode = 2
+
+[node name="EditBaseButton" type="Button" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/EditControll/VBoxContainer"]
+layout_mode = 2
+text = "Edit base"
+
+[node name="AddNewButton" type="Button" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/EditControll/VBoxContainer"]
+layout_mode = 2
+text = "Add fork"
+
+[node name="ForkContainer" type="MarginContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Pic" type="MarginContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Pic"]
+layout_mode = 2
+texture = ExtResource("8_t7vtc")
+
+[node name="Description" type="MarginContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Health: 10"
+
+[node name="PointsLabel" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Points: 10"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Editor symbol:"
+
+[node name="LableSymble" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "A"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "PowerUP:"
+
+[node name="LableSymble" type="Label" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "shield"
+
+[node name="Button" type="Button" parent="CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit This "
+
+[node name="CenterTopLabel" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(880, 34)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -440.0
+offset_right = 440.0
+offset_bottom = 54.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = -15
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="CenterTopLabel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "LevelMmanager2"
+horizontal_alignment = 1
+
+[node name="CenterTop" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(880, 34)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_bottom = 0.405
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MenuBar" type="MenuBar" parent="CenterTop"]
+layout_mode = 2
+
+[node name="File" type="PopupMenu" parent="CenterTop/MenuBar"]
+item_count = 4
+item_0/text = "New"
+item_0/id = 0
+item_1/text = "Open"
+item_1/id = 1
+item_2/text = "Save"
+item_2/id = 3
+item_3/text = "Quit"
+item_3/id = 2
+
+[node name="FileDialog" type="FileDialog" parent="."]
+title = "Open a File"
+initial_position = 2
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tres")
+
+[node name="SaveFileDialog" type="FileDialog" parent="."]
+initial_position = 2
+
+[node name="WarningPopup" type="AcceptDialog" parent="."]
+unique_name_in_owner = true
+initial_position = 2
+size = Vector2i(208, 100)
+dialog_text = "Warning! nothig to save!!"
+dialog_autowrap = true
+
+[connection signal="value_changed" from="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/movement_speed_slider" to="." method="_on_movement_speed_slider_value_changed"]
+[connection signal="value_changed" from="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer/down_movement_speed_slider" to="." method="_on_down_movement_speed_slider_value_changed"]
+[connection signal="pressed" from="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer3/VBoxContainer/Edit formation" to="." method="_on_edit_formation_pressed"]
+[connection signal="pressed" from="left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4/VBoxContainer/Edit enemies" to="." method="_on_edit_enemies_pressed"]

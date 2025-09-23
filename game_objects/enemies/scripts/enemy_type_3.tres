@@ -1,0 +1,129 @@
+[gd_resource type="BehaviorTree" load_steps=23 format=3 uid="uid://cqf3bq1fu1k66"]
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_a0cys"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="BTAction" id="BTAction_ymdf1"]
+resource_local_to_scene = false
+resource_name = ""
+group = &"player"
+output_var = &"target"
+
+[sub_resource type="BTRunLimit" id="BTRunLimit_ci0yu"]
+resource_local_to_scene = false
+resource_name = ""
+children = [SubResource("BTAction_ymdf1")]
+
+[sub_resource type="BBVariant" id="BBVariant_212wt"]
+resource_local_to_scene = false
+resource_name = "true"
+type = 1
+saved_value = true
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_ymdf1"]
+resource_local_to_scene = false
+resource_name = ""
+property = &"is_idle"
+value = SubResource("BBVariant_212wt")
+
+[sub_resource type="BTAction" id="BTAction_f4nn5"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="BTSequence" id="BTSequence_ci0yu"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "IdleStayPhase"
+children = [SubResource("BTCheckAgentProperty_ymdf1"), SubResource("BTAction_f4nn5")]
+
+[sub_resource type="BTWaitTicks" id="BTWaitTicks_4rgn6"]
+resource_local_to_scene = false
+resource_name = ""
+num_ticks = 10
+
+[sub_resource type="BBNode" id="BBNode_8p28b"]
+resource_local_to_scene = false
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_ibtr3"]
+resource_local_to_scene = false
+resource_name = ""
+node = SubResource("BBNode_8p28b")
+method = &"emittig_fire"
+
+[sub_resource type="BTAction" id="BTAction_osybs"]
+resource_local_to_scene = false
+resource_name = ""
+dive_speed = 1.0
+target_var = &"target"
+
+[sub_resource type="BTAction" id="BTAction_gigdn"]
+resource_local_to_scene = false
+resource_name = ""
+
+[sub_resource type="BBNode" id="BBNode_osybs"]
+resource_local_to_scene = false
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_jpmb7"]
+resource_local_to_scene = false
+resource_name = ""
+node = SubResource("BBNode_osybs")
+method = &"emittig_fire"
+
+[sub_resource type="BBNode" id="BBNode_212wt"]
+resource_local_to_scene = false
+resource_name = "."
+saved_value = NodePath(".")
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_ymdf1"]
+resource_local_to_scene = false
+resource_name = ""
+node = SubResource("BBNode_212wt")
+method = &"is_idle_invert"
+
+[sub_resource type="BTSequence" id="BTSequence_v83k5"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "DiveAttack pattern"
+children = [SubResource("BTCallMethod_ibtr3"), SubResource("BTAction_osybs"), SubResource("BTAction_gigdn"), SubResource("BTCallMethod_jpmb7"), SubResource("BTCallMethod_ymdf1")]
+metadata/_weight_ = 0.1
+
+[sub_resource type="BTAction" id="BTAction_ibtr3"]
+resource_local_to_scene = false
+resource_name = ""
+parameter1 = 0.0
+parameter2 = Vector2(0, 0)
+
+[sub_resource type="BTSequence" id="BTSequence_osybs"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "Do nothing"
+children = [SubResource("BTAction_ibtr3")]
+metadata/_weight_ = 0.025
+
+[sub_resource type="BTProbabilitySelector" id="BTProbabilitySelector_ci0yu"]
+resource_local_to_scene = false
+resource_name = ""
+children = [SubResource("BTSequence_v83k5"), SubResource("BTSequence_osybs")]
+
+[sub_resource type="BTSequence" id="BTSequence_37e0u"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "CombatPhase"
+children = [SubResource("BTWaitTicks_4rgn6"), SubResource("BTProbabilitySelector_ci0yu")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_ijrmc"]
+resource_local_to_scene = false
+resource_name = ""
+custom_name = "Root"
+children = [SubResource("BTRunLimit_ci0yu"), SubResource("BTSequence_ci0yu"), SubResource("BTSequence_37e0u")]
+
+[resource]
+resource_local_to_scene = false
+resource_name = ""
+blackboard_plan = SubResource("BlackboardPlan_a0cys")
+root_task = SubResource("BTDynamicSelector_ijrmc")

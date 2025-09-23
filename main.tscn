@@ -1,0 +1,605 @@
+[gd_scene load_steps=16 format=3 uid="uid://cx85mcv4alstb"]
+
+[ext_resource type="Script" uid="uid://k1isg5n2xfky" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://qcs0jq4i0qna" path="res://scripts/level_manager_2.gd" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://dmwfoldm2rbqh" path="res://scripts/ui/ui_root.gd" id="3_4c57u"]
+[ext_resource type="Texture2D" uid="uid://rm8el386nhdu" path="res://ui_elements/crosshair042.png" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://bdeq381pl8bmi" path="res://ui_elements/enemies/enemy_sprites/spaceShips_007_d.png" id="4_7mycd"]
+[ext_resource type="Script" uid="uid://tvju8mm3o38g" path="res://scripts/ui/grid_editor.gd" id="6_efxa6"]
+[ext_resource type="Script" uid="uid://bjblt33a7cfl1" path="res://scripts/ui/standart_symbols_container.gd" id="7_4c57u"]
+[ext_resource type="Script" uid="uid://enfihuxjtjxw" path="res://scripts/ui/enemy_editor.gd" id="7_272bh"]
+[ext_resource type="Script" uid="uid://baoblnlnvqifm" path="res://scripts/ui/extended_symbols_container.gd" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://diw1mohtu5gxl" path="res://ui_elements/enemies/enemy_sprites/spaceShips_001_d.png" id="8_vivmo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
+size = Vector2(200, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(200, 720)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.152941, 0.152941, 0.152941, 0.803922)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_0xm2m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
+bg_color = Color(0.2, 0.2, 0.2, 0.941176)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[node name="WorldScene" type="Node2D"]
+script = ExtResource("1_0xm2m")
+
+[node name="GameRoot" type="Node2D" parent="."]
+
+[node name="LevelManager2" type="Node2D" parent="."]
+script = ExtResource("2_h2yge")
+metadata/_custom_type_script = "uid://qcs0jq4i0qna"
+
+[node name="EnemiesContainer" type="Node" parent="."]
+
+[node name="ScreanBoarder" type="Node" parent="."]
+
+[node name="Left" type="Area2D" parent="ScreanBoarder"]
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreanBoarder/Left"]
+position = Vector2(100, 360)
+shape = SubResource("RectangleShape2D_0xm2m")
+
+[node name="Right" type="Area2D" parent="ScreanBoarder"]
+position = Vector2(1180, 360)
+collision_layer = 512
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreanBoarder/Right"]
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="UIRoot" type="CanvasLayer" parent="."]
+script = ExtResource("3_4c57u")
+
+[node name="left" type="MarginContainer" parent="UIRoot"]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 200.0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/left"]
+layout_mode = 2
+
+[node name="infoPanel" type="Panel" parent="UIRoot/left/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(3.465, 43.04)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/left/VBoxContainer/infoPanel"]
+clip_contents = true
+layout_mode = 0
+offset_top = 4.0
+offset_right = 200.0
+offset_bottom = 14.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_0xm2m")
+
+[node name="lvlNameLabel" type="Label" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "Map_name"
+autowrap_mode = 3
+
+[node name="movement_speed" type="Label" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "movement_speed"
+autowrap_mode = 3
+
+[node name="shift_down_speed" type="Label" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "shift_down_speed"
+autowrap_mode = 3
+
+[node name="start_y" type="Label" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "start_y"
+autowrap_mode = 3
+
+[node name="HSeparator2" type="HSeparator" parent="UIRoot/left/VBoxContainer"]
+layout_mode = 2
+
+[node name="ControllPanel" type="Panel" parent="UIRoot/left/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(3.465, 43.04)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2yge")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/left/VBoxContainer/ControllPanel"]
+clip_contents = true
+layout_mode = 0
+offset_top = 4.0
+offset_right = 200.0
+offset_bottom = 14.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_0xm2m")
+
+[node name="CheckButton" type="CheckButton" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Move formation"
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="movement_speed_control_lable" type="Label" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Side Speed : "
+
+[node name="movement_speed_slider" type="HSlider" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="down_movement_speed_control_lable" type="Label" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Down Speed : "
+
+[node name="down_movement_speed_slider" type="HSlider" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+step = 0.5
+
+[node name="PanelContainer3" type="PanelContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="Edit formation" type="Button" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer3/VBoxContainer"]
+layout_mode = 2
+text = "Edit formation"
+icon = ExtResource("3_lquwl")
+expand_icon = true
+
+[node name="PanelContainer4" type="PanelContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="Edit enemies" type="Button" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4/VBoxContainer"]
+layout_mode = 2
+text = "Edit enemies"
+icon = ExtResource("4_7mycd")
+expand_icon = true
+
+[node name="right" type="MarginContainer" parent="UIRoot"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="UIRoot/right"]
+layout_mode = 2
+
+[node name="CenterGridEditor" type="MarginContainer" parent="UIRoot"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(880, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("6_efxa6")
+
+[node name="Panel" type="Panel" parent="UIRoot/CenterGridEditor"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="GridEditor" type="VBoxContainer" parent="UIRoot/CenterGridEditor/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 870.0
+offset_bottom = 590.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainer"]
+layout_mode = 2
+
+[node name="AddRowButton" type="Button" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "AddRow"
+
+[node name="AddFilledRowButton" type="Button" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "AddFilledRowButton"
+
+[node name="RefreshButton" type="Button" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh"
+
+[node name="GridContainer" type="GridContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainerSymbol" type="MarginContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainerSymbol"]
+layout_mode = 2
+
+[node name="StandartSymbolsContainer" type="HBoxContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainerSymbol/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 5
+script = ExtResource("7_4c57u")
+
+[node name="ExtendedSymbolsContainer" type="HBoxContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainerSymbol/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("8_efxa6")
+
+[node name="MarginContainerRow" type="MarginContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainerRow"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="RowControlsContainer" type="VBoxContainer" parent="UIRoot/CenterGridEditor/Panel/GridEditor/MarginContainerRow/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CenterEnemyEditor" type="MarginContainer" parent="UIRoot"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(880, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("7_272bh")
+
+[node name="Panel" type="Panel" parent="UIRoot/CenterEnemyEditor"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lquwl")
+
+[node name="MainTabContainer" type="TabContainer" parent="UIRoot/CenterEnemyEditor/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 0
+
+[node name="SharpShotTest" type="TabBar" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer"]
+layout_mode = 2
+
+[node name="Pic" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Pic"]
+layout_mode = 2
+texture = ExtResource("8_vivmo")
+
+[node name="Description" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="BaseHealthLabel" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+text = "BaseHealthLabel : 10"
+
+[node name="BasePointsLabel" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+text = "BasePointsLabel : 10"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Editor symbol:"
+
+[node name="LableSymble" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[node name="EditControll" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/EditControll"]
+layout_mode = 2
+
+[node name="EditBaseButton" type="Button" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/EditControll/VBoxContainer"]
+layout_mode = 2
+text = "Edit base"
+
+[node name="AddNewButton" type="Button" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/EditControll/VBoxContainer"]
+layout_mode = 2
+text = "Add fork"
+
+[node name="ForkContainer" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Panel" type="Panel" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Pic" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="TextureRect" type="TextureRect" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Pic"]
+layout_mode = 2
+texture = ExtResource("8_vivmo")
+
+[node name="Description" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Health: 10"
+
+[node name="PointsLabel" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Points: 10"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "Editor symbol:"
+
+[node name="LableSymble" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2/HBoxContainer"]
+layout_mode = 2
+text = "A"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "PowerUP:"
+
+[node name="LableSymble" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "shield"
+
+[node name="Button" type="Button" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Edit This "
+
+[node name="CenterTopLabel" type="MarginContainer" parent="UIRoot"]
+custom_minimum_size = Vector2(880, 34)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -440.0
+offset_right = 440.0
+offset_bottom = 54.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = -15
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="UIRoot/CenterTopLabel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "LevelMmanager2"
+horizontal_alignment = 1
+
+[node name="CenterTop" type="MarginContainer" parent="UIRoot"]
+custom_minimum_size = Vector2(880, 34)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_bottom = 0.405
+grow_horizontal = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="MenuBar" type="MenuBar" parent="UIRoot/CenterTop"]
+layout_mode = 2
+
+[node name="File" type="PopupMenu" parent="UIRoot/CenterTop/MenuBar"]
+item_count = 4
+item_0/text = "New"
+item_0/id = 0
+item_1/text = "Open"
+item_1/id = 1
+item_2/text = "Save"
+item_2/id = 3
+item_3/text = "Quit"
+item_3/id = 2
+
+[node name="FileDialog" type="FileDialog" parent="UIRoot"]
+title = "Open a File"
+initial_position = 2
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.tres")
+
+[node name="SaveFileDialog" type="FileDialog" parent="UIRoot"]
+title = "Save a lvl"
+initial_position = 2
+root_subfolder = "lvl"
+filters = PackedStringArray("tres")
+
+[node name="WarningPopup" type="AcceptDialog" parent="UIRoot"]
+unique_name_in_owner = true
+initial_position = 2
+size = Vector2i(208, 100)
+dialog_text = "Warning! nothig to save!!"
+dialog_autowrap = true
+
+[connection signal="toggled" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
+[connection signal="value_changed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/movement_speed_slider" to="." method="_on_movement_speed_slider_value_changed"]
+[connection signal="value_changed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/movement_speed_slider" to="UIRoot" method="_on_movement_speed_slider_value_changed"]
+[connection signal="value_changed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer/down_movement_speed_slider" to="." method="_on_down_movement_speed_slider_value_changed"]
+[connection signal="value_changed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer/down_movement_speed_slider" to="UIRoot" method="_on_down_movement_speed_slider_value_changed"]
+[connection signal="pressed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer3/VBoxContainer/Edit formation" to="UIRoot" method="_on_edit_formation_pressed"]
+[connection signal="pressed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4/VBoxContainer/Edit enemies" to="UIRoot" method="_on_edit_enemies_pressed"]
+[connection signal="index_pressed" from="UIRoot/CenterTop/MenuBar/File" to="." method="_on_file_index_pressed"]
+[connection signal="file_selected" from="UIRoot/SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]

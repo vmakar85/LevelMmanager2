@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://d07km304vf5ie"]
+
+[ext_resource type="Texture2D" uid="uid://5tc5uowd2uoa" path="res://enemies/enemy_gear/simple_plasma_shield/simple_plasma_shield.png" id="1_byy1j"]
+[ext_resource type="Script" uid="uid://dlwg2sy10pucg" path="res://enemies/enemy_gear/simple_plasma_shield/simple_plasma_shield.gd" id="1_u5iks"]
+
+[node name="SimplePlasmaShield" type="Node2D"]
+script = ExtResource("1_u5iks")
+
+[node name="SimplePlasmaShield" type="Sprite2D" parent="."]
+texture = ExtResource("1_byy1j")
+
+[node name="EnemyBullet" type="Area2D" parent="."]
+rotation = 1.5708
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyBullet"]
+polygon = PackedVector2Array(5.99977, -64, 6.00023, 64, -5.99977, 64, -6.00023, -64)

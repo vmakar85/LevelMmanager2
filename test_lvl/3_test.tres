@@ -1,0 +1,39 @@
+[gd_resource type="Resource" script_class="LevelResource2" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/formation_resource_2.gd" id="1_olsvg"]
+[ext_resource type="Script" path="res://scripts/level_resource_2.gd" id="2_gf2mx"]
+
+[sub_resource type="Resource" id="Resource_cwmx5"]
+script = ExtResource("1_olsvg")
+level_name = "Level 3 test"
+ascii_layout = Array[String](["2**1**2*", "*A*1**0", "2**1***2"])
+powerup_mapping = {
+"A": {
+"enemy": 2,
+"powerup": "shield"
+},
+"B": {
+"enemy": 1,
+"powerup": "double_shot"
+},
+"C": {
+"enemy": 2,
+"powerup": "extra_life"
+},
+"D": {
+"enemy": 1,
+"powerup": "bomb"
+},
+"E": {
+"enemy": 1,
+"powerup": "speed_boost"
+}
+}
+movement_speed = 63.0
+shift_down_speed = 5.0
+start_y = 100.0
+metadata/_custom_type_script = "uid://1p6q0f2gw1cf"
+
+[resource]
+script = ExtResource("2_gf2mx")
+formation = SubResource("Resource_cwmx5")

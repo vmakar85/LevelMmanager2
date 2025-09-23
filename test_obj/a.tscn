@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://chkrldcgl3uvm"]
+
+[ext_resource type="Script" uid="uid://cafdscqlty2nq" path="res://test_obj/a.gd" id="1_bph8e"]
+[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://test_obj/ray_component/rays.tscn" id="2_wseex"]
+
+[sub_resource type="Gradient" id="Gradient_4mwqj"]
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bph8e"]
+gradient = SubResource("Gradient_4mwqj")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[node name="A" type="Node2D"]
+script = ExtResource("1_bph8e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_bph8e")
+
+[node name="Rays" parent="." instance=ExtResource("2_wseex")]
