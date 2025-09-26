@@ -22,8 +22,8 @@ class_name FormationResource2 extends Resource
 ## Стартовая позиция формации по вертикали (Y-координата)
 @export var start_y: float = 100.0
 
-@export var enemy_overrides: Array[EnemyOverrideResource] = []
-@export var powerup_mapping: Array[PowerupMappingResource] = []
+@export var enemy_overrides: Array[EnemyOverrideResource] = [] # <- по дефолту пустой массив
+@export var powerup_mapping: Array[PowerupMappingResource] = [] # <- по дефолту пустой массив
 
 # структура ячейки
 class Cell:
@@ -41,10 +41,10 @@ func parse_ascii() -> Array:
 			elif chr.is_valid_int():
 				cell.type = int(chr)
 			elif chr.is_valid_ascii_identifier():
-				var mapping := get_powerup_mapping(chr)
+				var mapping := get_powerup_mapping(str(chr))
 				if mapping != null:
-					cell.type = mapping.enemy_id
-					cell.powerup = mapping.powerup
+					cell.type = mapping.get_enemy_id()
+					cell.powerup = mapping.get_powerup_name()
 				else:
 					cell.type = -1 # если в ascii_layout есть буква, но нет маппинга
 			else:
@@ -60,9 +60,9 @@ func get_override(enemy_id: String) -> EnemyOverrideResource:
 	return null
 
 func get_powerup_mapping(symbol: String) -> PowerupMappingResource:
-	for pm in powerup_mapping:
-		if pm.symbol == symbol:
-			return pm
+	for mapping in powerup_mapping:
+		if mapping.get_key() == symbol:
+			return mapping
 	return null
 
 func get_enemy_override(enemy_id: String) -> EnemyOverrideResource:

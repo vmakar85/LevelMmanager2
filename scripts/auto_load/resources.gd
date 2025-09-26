@@ -47,5 +47,6 @@ var enemy_description:Dictionary = {
 	 "name" : "paladin_ship", "sname" : "Paladin", "base_hp" :  150 , "base_point" : 25 },
 	}
 
-
+var powerups:Dictionary = {
 	
+}

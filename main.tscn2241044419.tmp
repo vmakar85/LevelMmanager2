@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cx85mcv4alstb"]
+[gd_scene load_steps=16 format=3 uid="uid://cx85mcv4alstb"]
 
 [ext_resource type="Script" uid="uid://k1isg5n2xfky" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://qcs0jq4i0qna" path="res://scripts/level_manager_2.gd" id="2_h2yge"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" uid="uid://enfihuxjtjxw" path="res://scripts/ui/enemy_editor.gd" id="7_272bh"]
 [ext_resource type="Script" uid="uid://baoblnlnvqifm" path="res://scripts/ui/extended_symbols_container.gd" id="8_efxa6"]
 [ext_resource type="Texture2D" uid="uid://diw1mohtu5gxl" path="res://ui_elements/enemies/enemy_sprites/spaceShips_001_d.png" id="8_vivmo"]
-[ext_resource type="Script" uid="uid://b0qp6dhx453kp" path="res://scripts/ui/create_new_enemy_dialog.gd" id="11_efxa6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(200, 720)
@@ -576,132 +575,24 @@ item_3/text = "Quit"
 item_3/id = 2
 
 [node name="FileDialog" type="FileDialog" parent="UIRoot"]
-oversampling_override = 1.0
 title = "Open a File"
 initial_position = 2
 ok_button_text = "Open"
 file_mode = 0
-root_subfolder = "lvl"
 filters = PackedStringArray("*.tres")
 
 [node name="SaveFileDialog" type="FileDialog" parent="UIRoot"]
-oversampling_override = 1.0
 title = "Save a lvl"
 initial_position = 2
 root_subfolder = "lvl"
 filters = PackedStringArray("tres")
 
-[node name="CreateNewEnemyDialog" type="ConfirmationDialog" parent="UIRoot"]
-oversampling_override = 1.0
-initial_position = 1
-size = Vector2i(347, 258)
-visible = true
-script = ExtResource("11_efxa6")
-
-[node name="MarginContainer" type="MarginContainer" parent="UIRoot/CreateNewEnemyDialog"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 339.0
-offset_bottom = 209.0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer"]
-layout_mode = 2
-
-[node name="NewSymbolLabel" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Enemy: %s "
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "Health: 0"
-
-[node name="MarginContainer" type="MarginContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
-layout_mode = 2
-
-[node name="ButtonHp-" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-text = "-"
-
-[node name="ButtonHp+" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-text = "+"
-
-[node name="Label" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "Amount : "
-
-[node name="HOptionButton" type="OptionButton" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="WarningPopup" type="AcceptDialog" parent="UIRoot"]
 unique_name_in_owner = true
-layout_mode = 2
-selected = 0
-item_count = 3
-popup/item_0/text = "1"
-popup/item_0/id = 0
-popup/item_1/text = "5"
-popup/item_1/id = 1
-popup/item_2/text = "10"
-popup/item_2/id = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Points: 0 "
-
-[node name="MarginContainer" type="MarginContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 8
-
-[node name="ButtonP-" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-text = "-"
-
-[node name="ButtonP+" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-text = "+"
-
-[node name="Label" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-layout_mode = 2
-text = "Amount : "
-
-[node name="POptionButton" type="OptionButton" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-selected = 0
-item_count = 3
-popup/item_0/text = "1"
-popup/item_0/id = 0
-popup/item_1/text = "5"
-popup/item_1/id = 1
-popup/item_2/text = "10"
-popup/item_2/id = 2
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-text = "PowerUP:"
-
-[node name="OptionButton" type="OptionButton" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
+initial_position = 2
+size = Vector2i(208, 100)
+dialog_text = "Warning! nothig to save!!"
+dialog_autowrap = true
 
 [connection signal="toggled" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="value_changed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/movement_speed_slider" to="." method="_on_movement_speed_slider_value_changed"]
@@ -712,5 +603,3 @@ layout_mode = 2
 [connection signal="pressed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4/VBoxContainer/Edit enemies" to="UIRoot" method="_on_edit_enemies_pressed"]
 [connection signal="index_pressed" from="UIRoot/CenterTop/MenuBar/File" to="." method="_on_file_index_pressed"]
 [connection signal="file_selected" from="UIRoot/SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
-[connection signal="item_selected" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/HOptionButton" to="UIRoot/CreateNewEnemyDialog" method="_on_h_option_button_item_selected"]
-[connection signal="item_selected" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/POptionButton" to="UIRoot/CreateNewEnemyDialog" method="_on_p_option_button_item_selected"]

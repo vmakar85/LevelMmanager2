@@ -10,6 +10,12 @@ signal formation_updated(current_formation : FormationResource2)
 ## UI -> WorldScene 
 signal refresh_formation(current_formation : FormationResource2)
 
+## UI -> CenterEnemyEditor -> CreateNewEnemyDialog
+signal request_create_new_enemy_dialog(current_formation : FormationResource2)
+
+func emit_request_create_new_enemy_dialog(current_formation : FormationResource2):
+	request_create_new_enemy_dialog.emit(current_formation)
+
 func emit_refresh_formation(current_formation : FormationResource2):
 	refresh_formation.emit(current_formation)
 

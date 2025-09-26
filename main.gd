@@ -38,7 +38,8 @@ func _on_movement_speed_slider_value_changed(value: float) -> void:
 func _on_down_movement_speed_slider_value_changed(value: float) -> void:
 	current_formation.shift_down_speed = value
 	lm2.change_current_down_movement_speed(value)
-
+	
+# не работает =((( 
 func _save_resource_to_file(resource_instance: LevelResource2, file_path: String) -> void:
 	# Важно: resource_instance - это экземпляр вашего MyRes, который мы создали и редактировали
 	# file_path - это полный путь, куда сохранить, например: "user://my_save.tres"
@@ -50,16 +51,30 @@ func _save_resource_to_file(resource_instance: LevelResource2, file_path: String
 	else:
 		push_error("Произошла ошибка при сохранении. Код ошибки: " + str(error_code))
 
-func _on_refrash_formation() -> void:
+func _on_refrash_formation(cf : FormationResource2 ) -> void:
 	get_tree().call_group("enemies", "queue_free")
-	lm2.update_current_fromation(current_formation)
+	lm2.update_current_fromation(cf)
 
 func _create_new_lvl() -> void:
 	var new_lvl : LevelResource2 = LevelResource2.new()
-	var mew_formation = FormationResource2.new()
-	mew_formation.powerup_mapping
-	mew_formation.enemy_overrides
-	new_lvl.formation = mew_formation
+	var new_formation = FormationResource2.new()   
+
+	var entry = PowerupMappingResource.new()
+	entry.key = "A"
+	entry.enemy_id = "0"
+
+	var powerup = PowerupResource.new()
+	powerup.icon = load("res://power_ups/hp.png")
+	powerup.type = PowerupResource.PowerupType.HEALUP
+	powerup.scene = preload("uid://dtffa2a0lnbl5")
+
+	entry.powerup = powerup
+	
+	new_formation.powerup_mapping.append(entry)   
+	new_formation.enemy_overrides.append(EnemyOverrideResource.new())
+
+	new_lvl.formation = new_formation  
+	
 	get_tree().call_group("enemies", "queue_free")
 	lm2.clear_lvl_res()
 	lm2.create_level(new_lvl)

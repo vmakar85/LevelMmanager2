@@ -33,7 +33,7 @@ func _update(formation: FormationResource2):
 		_create_row_ui(row_idx)
 	# 3. устанавливаем дополнительные символы если такие имеются 
 	_update_extended_symbols_container(formation)
-	
+
 func _update_extended_symbols_container(formation: FormationResource2):
 	if formation.powerup_mapping.size() > 0:
 		UiSignalBus.emit_extended_symbol_add(formation.powerup_mapping)

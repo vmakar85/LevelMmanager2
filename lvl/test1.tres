@@ -10,8 +10,9 @@
 
 [sub_resource type="Resource" id="Resource_pmr1w"]
 script = ExtResource("1_pmr1w")
-health = 10
-points = 10
+health = 13
+points = 13
+self_name = "salf_name_test"
 metadata/_custom_type_script = "uid://dahrvmpvdre0x"
 
 [sub_resource type="Resource" id="Resource_pkn4y"]
@@ -27,6 +28,7 @@ metadata/_custom_type_script = "uid://b4bau58l8a2s2"
 
 [sub_resource type="Resource" id="Resource_et7wd"]
 script = ExtResource("3_pkn4y")
+ascii_layout = Array[String](["*A*1"])
 enemy_overrides = Array[ExtResource("1_pmr1w")]([SubResource("Resource_pmr1w")])
 powerup_mapping = Array[ExtResource("2_n6fcn")]([SubResource("Resource_n6fcn")])
 metadata/_custom_type_script = "uid://1p6q0f2gw1cf"

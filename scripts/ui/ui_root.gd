@@ -6,8 +6,8 @@ extends CanvasLayer
 
 func _ready() -> void:
 	UiSignalBus.formation_updated.connect(_on_formation_updated)
-	%infoPanel.visible = false
-	%ControllPanel.visible = false
+	#%infoPanel.visible = false
+	#%ControllPanel.visible = false
 
 func _on_formation_updated(formation_resource: FormationResource2):
 	# ... обновляем все элементы UI ...
