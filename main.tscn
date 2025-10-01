@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cx85mcv4alstb"]
+[gd_scene load_steps=20 format=3 uid="uid://cx85mcv4alstb"]
 
 [ext_resource type="Script" uid="uid://k1isg5n2xfky" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://qcs0jq4i0qna" path="res://scripts/level_manager_2.gd" id="2_h2yge"]
@@ -11,6 +11,9 @@
 [ext_resource type="Script" uid="uid://baoblnlnvqifm" path="res://scripts/ui/extended_symbols_container.gd" id="8_efxa6"]
 [ext_resource type="Texture2D" uid="uid://diw1mohtu5gxl" path="res://ui_elements/enemies/enemy_sprites/spaceShips_001_d.png" id="8_vivmo"]
 [ext_resource type="Script" uid="uid://b0qp6dhx453kp" path="res://scripts/ui/create_new_enemy_dialog.gd" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://bu8safbwuv5v1" path="res://ui_elements/fork_container.tscn" id="11_w48qg"]
+[ext_resource type="Script" uid="uid://cedgc7p8w0bo5" path="res://scripts/powerup_resource.gd" id="12_ycdy4"]
+[ext_resource type="Resource" uid="uid://b0m40ctlsi5ps" path="res://power_ups/hpup.tres" id="13_w48qg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(200, 720)
@@ -332,7 +335,6 @@ layout_mode = 2
 
 [node name="CenterEnemyEditor" type="MarginContainer" parent="UIRoot"]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(880, 600)
 anchors_preset = 8
 anchor_left = 0.5
@@ -441,94 +443,8 @@ text = "Edit base"
 layout_mode = 2
 text = "Add fork"
 
-[node name="ForkContainer" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer"]
+[node name="ForkContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer" instance=ExtResource("11_w48qg")]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="Panel" type="Panel" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer"]
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-horizontal_scroll_mode = 0
-vertical_scroll_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Pic" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="TextureRect" type="TextureRect" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Pic"]
-layout_mode = 2
-texture = ExtResource("8_vivmo")
-
-[node name="Description" type="MarginContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description"]
-layout_mode = 2
-size_flags_vertical = 4
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
-layout_mode = 2
-
-[node name="HealthLabel" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Health: 10"
-
-[node name="PointsLabel" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-text = "Points: 10"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "Editor symbol:"
-
-[node name="LableSymble" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer2/HBoxContainer"]
-layout_mode = 2
-text = "A"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "PowerUP:"
-
-[node name="LableSymble" type="Label" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-text = "shield"
-
-[node name="Button" type="Button" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/ForkContainer/Panel/ScrollContainer/VBoxContainer/HBoxContainer/Description/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Edit This "
 
 [node name="CenterTopLabel" type="MarginContainer" parent="UIRoot"]
 custom_minimum_size = Vector2(880, 34)
@@ -595,8 +511,8 @@ filters = PackedStringArray("tres")
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(347, 258)
-visible = true
 script = ExtResource("11_efxa6")
+available_powerups = Array[ExtResource("12_ycdy4")]([ExtResource("13_w48qg")])
 
 [node name="MarginContainer" type="MarginContainer" parent="UIRoot/CreateNewEnemyDialog"]
 offset_left = 8.0
@@ -606,6 +522,8 @@ offset_bottom = 209.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 14
 
 [node name="NewSymbolLabel" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -625,17 +543,17 @@ size_flags_horizontal = 10
 [node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
 layout_mode = 2
 
-[node name="ButtonHp-" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="ButtonHpM" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 text = "-"
 
-[node name="ButtonHp+" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
+[node name="ButtonHpP" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 text = "+"
 
-[node name="Label" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+[node name="LabelHP" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Amount : "
 
@@ -666,17 +584,17 @@ size_flags_horizontal = 10
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="ButtonP-" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
+[node name="ButtonPM" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 text = "-"
 
-[node name="ButtonP+" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(24, 24)
+[node name="ButtonPP" type="Button" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
 layout_mode = 2
 text = "+"
 
-[node name="Label" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+[node name="LabelPoint" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = "Amount : "
 
@@ -695,6 +613,7 @@ popup/item_2/id = 2
 [node name="HBoxContainer3" type="HBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="Label" type="Label" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
@@ -702,6 +621,8 @@ text = "PowerUP:"
 
 [node name="OptionButton" type="OptionButton" parent="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
 
 [connection signal="toggled" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/CheckButton" to="." method="_on_check_button_toggled"]
 [connection signal="value_changed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer/movement_speed_slider" to="." method="_on_movement_speed_slider_value_changed"]
@@ -712,5 +633,11 @@ layout_mode = 2
 [connection signal="pressed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4/VBoxContainer/Edit enemies" to="UIRoot" method="_on_edit_enemies_pressed"]
 [connection signal="index_pressed" from="UIRoot/CenterTop/MenuBar/File" to="." method="_on_file_index_pressed"]
 [connection signal="file_selected" from="UIRoot/SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
+[connection signal="confirmed" from="UIRoot/CreateNewEnemyDialog" to="UIRoot/CreateNewEnemyDialog" method="_on_confirmed"]
+[connection signal="pressed" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ButtonHpM" to="UIRoot/CreateNewEnemyDialog" method="_on_button_hp_m_pressed"]
+[connection signal="pressed" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ButtonHpP" to="UIRoot/CreateNewEnemyDialog" method="_on_button_hp_p_pressed"]
 [connection signal="item_selected" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/HOptionButton" to="UIRoot/CreateNewEnemyDialog" method="_on_h_option_button_item_selected"]
+[connection signal="pressed" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/ButtonPM" to="UIRoot/CreateNewEnemyDialog" method="_on_button_pm_pressed"]
+[connection signal="pressed" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/ButtonPP" to="UIRoot/CreateNewEnemyDialog" method="_on_button_pp_pressed"]
 [connection signal="item_selected" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/POptionButton" to="UIRoot/CreateNewEnemyDialog" method="_on_p_option_button_item_selected"]
+[connection signal="item_selected" from="UIRoot/CreateNewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer3/OptionButton" to="UIRoot/CreateNewEnemyDialog" method="_on_option_button_item_selected"]

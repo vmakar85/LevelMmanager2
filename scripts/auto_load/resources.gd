@@ -46,7 +46,3 @@ var enemy_description:Dictionary = {
 	"8" : {"pic" :"res://ui_elements/enemies/enemy_sprites/spaceShips_009_d.png",
 	 "name" : "paladin_ship", "sname" : "Paladin", "base_hp" :  150 , "base_point" : 25 },
 	}
-
-var powerups:Dictionary = {
-	
-}

@@ -71,7 +71,7 @@ func update_speed():
 		current_speed = 0.0 
 	last_position = global_position
 	last_update_time = current_time
-	
+
 func _physics_process(_delta: float) -> void:
 	if rays.ray_left.is_colliding() or rays.ray_right.is_colliding():
 		var r_collider: Node2D = rays.ray_right.get_collider()

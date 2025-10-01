@@ -70,7 +70,8 @@ func _spawn_anchors_and_enemies() -> void:
 			anchor.global_rotation_degrees = 180
 			anchor.name = "Anchor_R%sC%s" % [row, col]
 			## тут начинем добавлять наших врагов
-			if cell.type >= 0 :#and cell.type < enemy_scenes.size():
+			if cell.type >= 0:
+				# обычный враг без override
 				var enemy_scene: PackedScene = enemy_scenes.get(str(cell.type))
 				var enemy = enemy_scene.instantiate()
 				enemy.position = Vector2(
@@ -78,9 +79,28 @@ func _spawn_anchors_and_enemies() -> void:
 					current_formation.start_y + row * (enemy_size + enemy_offset)
 				)
 				enemy.global_rotation_degrees = 180
-				enemy.power_up = cell.powerup
 				enemy.anchor = anchor
 				enemies_container.add_child(enemy)
+			elif cell.type == -2 and cell.override_key != "":
+				# враг с override (буква)
+				var override = current_formation.get_override_by_key(cell.override_key)
+				if override != null:
+					var enemy_scene: PackedScene = enemy_scenes.get(override.enemy_id)
+					var enemy = enemy_scene.instantiate()
+					enemy.position = Vector2(
+						start_x + col * (enemy_size + enemy_offset),
+						current_formation.start_y + row * (enemy_size + enemy_offset)
+					)
+					enemy.global_rotation_degrees = 180
+					# применяем параметры
+					if override.health > 0:
+						enemy.health = override.health
+					if override.points > 0:
+						enemy.points = override.points
+					if override.powerup != null:
+						enemy.power_up = override.get_powerup_name()
+					enemy.anchor = anchor
+					enemies_container.add_child(enemy)
 			add_child(anchor)
 			anchors.append(anchor)
 

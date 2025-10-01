@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dq0l6veyk2a7x" path="res://game_objects/enemies/enemy_sprites/spaceShips_003_d.png" id="2_xyuqv"]
 [ext_resource type="Texture2D" uid="uid://22q37gga0xge" path="res://game_objects/enemies/enemy_sprites/spaceShips_003_n.png" id="3_18uqn"]
 [ext_resource type="Texture2D" uid="uid://e0sjjfmfroog" path="res://game_objects/enemies/enemy_sprites/spaceShips_003_s.png" id="4_t1led"]
-[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://test_obj/ray_component/rays.tscn" id="5_rjgbj"]
+[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://game_objects/enemies/ray_component/rays.tscn" id="5_rjgbj"]
 
 [sub_resource type="Gradient" id="Gradient_e11l0"]
 offsets = PackedFloat32Array(0, 0.313158, 1)

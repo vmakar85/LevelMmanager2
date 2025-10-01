@@ -7,12 +7,15 @@ extends MarginContainer
 var formation_res: FormationResource2
 var available_powerups: Array = ["shield", "double_shot", "extra_life", "bomb", "speed_boost"] # Можно вынести в Resources
 
+func _ready() -> void:
+	UiSignalBus.enemy_editor_refresh.connect(_on_enemy_editor_refresh)
+
 func setup(formation: FormationResource2):
 	formation_res = formation
 	_update()
 
 func _update() -> void:
-	clear_tabs(main_tab_container)
+	clear_tabs(main_tab_container) # <- возможно не стоит чисттить это именно в контейнере табов
 	# пробегаем по всем базавым врагам и нацеживаем
 	# в них EnemyOverrideResource и PowerupMappingResource
 	for s in Resources.enemy_description: 
@@ -31,7 +34,7 @@ func _update() -> void:
 		# --- Pic (MarginContainer + TextureRect)
 		var pic_cnt = MarginContainer.new()
 		pic_cnt.name = "pic_cnt" + s
-		_margin_theme_constant_override(pic_cnt)
+		UIHelper.margin_theme_constant_override(pic_cnt)
 
 		var text_rec = TextureRect.new()
 		text_rec.name = "text_rec" + s
@@ -43,7 +46,7 @@ func _update() -> void:
 		# --- Description (MarginContainer + VBoxContainer + labels)
 		var des_cnt = MarginContainer.new()
 		des_cnt.name = "des_cnt" + s
-		_margin_theme_constant_override(des_cnt)
+		UIHelper.margin_theme_constant_override(des_cnt)
 		des_cnt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 #region label for params
 		create_descripttion_ui(des_cnt, s, enemy)
@@ -52,7 +55,7 @@ func _update() -> void:
 		# --- Edit Controls (MarginContainer + VBoxContainer + кнопки)
 		var edit_cnt = MarginContainer.new()
 		edit_cnt.name = "edit_cnt" + s
-		_margin_theme_constant_override(edit_cnt)
+		UIHelper.margin_theme_constant_override(edit_cnt)
 		edit_cnt.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 		var vbox_controls = VBoxContainer.new()
@@ -66,50 +69,35 @@ func _update() -> void:
 		add_new_btn.pressed.connect(_on_add_new_button_pressed.bind(s))
 		hbox_cnt.add_child(edit_cnt)
 #region контейнер для форков 
-		# Создаём контейнер для форков
-		var fork_cnt = MarginContainer.new()
-		fork_cnt.name = "fork_cnt" + s
-		_set_container_sizing(fork_cnt,Control.SIZE_EXPAND_FILL,Control.SIZE_EXPAND_FILL)
-		_margin_theme_constant_override(fork_cnt)
+		## fork-ui
+		var fork_scene: PackedScene = load("res://ui_elements/fork_container.tscn")
+		var fork_cnt = fork_scene.instantiate()
 		vbox_cnt.add_child(fork_cnt)
+		var fork_container = fork_cnt.get_node('ForkPanel/ForkScrollContainer/ForkContainer')
+		# получаем список всех перегрузок для уникального ключа enemy_id
+		var overrides = formation_res.get_overrides_by_key(s)
+		for ovr in overrides:
+			var o_enemy_id = ovr.get_enemy_id()
+			var o_overrided_id = ovr.get_enemy_overrided_id()
+			var o_health = ovr.get_health()
+			var o_points = ovr.get_points()
+			var o_powerup_name = ovr.get_powerup_name()
+			
+			var fork_cnt_panel = PanelContainer.new()
+			fork_container.add_child(fork_cnt_panel)
+			
+			var mcn = MarginContainer.new()
+			mcn.name = "edit_cnt" + s
+			UIHelper.margin_theme_constant_override(mcn)
+			mcn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			fork_cnt_panel.add_child(mcn)
 
-		var src_fork_cnt = ScrollContainer.new()
-		fork_cnt.add_child(src_fork_cnt)
-		_set_container_sizing(src_fork_cnt,Control.SIZE_EXPAND_FILL,Control.SIZE_EXPAND_FILL)
-		# Внутри него будет VBox, куда сложим все fork-ui
-		var forks_box = VBoxContainer.new()
-		src_fork_cnt.add_child(forks_box)
-		
-		# Теперь добавляем форки в forks_box
-		# так а тут теперь будем делать форки если есть....
-		var powerups_for_enemy = formation_res.get_powerups_for_enemy(s)
-		
-		for pfe in powerups_for_enemy:
-			var pfe_s = pfe.get_key()
-			var powerup_name = pfe.get_powerup_name()
-			
-			var efp = Panel.new()
-			forks_box.add_child(efp)
-			
-			var vbox = create_descripttion_ui(efp, pfe_s, enemy)
-			
+			var vbox = create_descripttion_ui(mcn, o_overrided_id, enemy)
 			var powerup_label = Label.new()
-			powerup_label.text = "Powerup: %s" % powerup_name
+			powerup_label.text = "Powerup: %s" % o_powerup_name
 			vbox.add_child(powerup_label)
-			
-			create_button(vbox,"del_btn" + s, "Delete fork %s " % pfe_s)
-		#var forks = formation.get_enemy_forks(s)
-		#for fork in forks:
-			#create_fork_ui(forks_box, fork)  # <- не в vbox_cnt, а в forks_box
+			create_button(vbox,"del_btn" + s, "Delete fork %s " % o_overrided_id)
 #endregion
-
-
-
-func _margin_theme_constant_override(node: Control,margin_value = 20 ) -> void:
-	node.add_theme_constant_override("margin_top", margin_value)
-	node.add_theme_constant_override("margin_left", margin_value)
-	node.add_theme_constant_override("margin_bottom", margin_value)
-	node.add_theme_constant_override("margin_right", margin_value)
 
 func _full_rect(node: Control) -> void:
 	node.set_anchors_preset(LayoutPreset.PRESET_FULL_RECT)
@@ -122,22 +110,6 @@ func clear_tabs(tab_container: TabContainer) -> void:
 	for i in range(tab_container.get_tab_count() - 1, -1, -1):
 		var child = tab_container.get_tab_control(i)
 		child.queue_free()
-
-func create_fork_ui(parent: VBoxContainer, fork: Dictionary) -> void:
-	var vbox = VBoxContainer.new()
-	parent.add_child(vbox)
-
-	var enemy_label = Label.new()
-	enemy_label.text = "Enemy: %s" % fork["enemy"]
-	vbox.add_child(enemy_label)
-
-	var powerup_label = Label.new()
-	powerup_label.text = "Powerup: %s" % fork["powerup"]
-	vbox.add_child(powerup_label)
-
-	var del_btn = Button.new()
-	del_btn.text = "Delete fork"
-	vbox.add_child(del_btn)
 
 func create_button(parent : Control, salf_name: String, text: String) -> Button:
 	var btn = Button.new()
@@ -158,7 +130,7 @@ func create_descripttion_ui(parent, s, enemy) -> VBoxContainer:
 	enemy_lbl.name = "enemy_name" + s
 	vbox_cnt_in_des_cnt.add_child(enemy_lbl)
 	
-	var override = formation_res.get_enemy_override(s)
+	var override = formation_res.get_override(s)
 	
 	if override != null and override.get_health() != -1:
 		bhp = override.get_health()
@@ -185,5 +157,8 @@ func _on_edit_base_button_pressed(id) -> void:
 	print(id) # ага приходит id 
 
 func _on_add_new_button_pressed(id) -> void:
-	print(id)
-	UiSignalBus.emit_request_create_new_enemy_dialog(formation_res) 
+	var context = {"enemy_id" : id }
+	UiSignalBus.emit_request_create_new_enemy_dialog(formation_res,context) 
+
+func _on_enemy_editor_refresh(formation: FormationResource2) -> void:
+	setup(formation)

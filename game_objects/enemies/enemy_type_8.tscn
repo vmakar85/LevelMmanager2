@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bvv1cnny70hkt" path="res://game_objects/enemies/enemy_sprites/spaceShips_008_d.png" id="2_v62h5"]
 [ext_resource type="Texture2D" uid="uid://clv10p4qqccsv" path="res://game_objects/enemies/enemy_sprites/spaceShips_008_n.png" id="3_qo3ys"]
 [ext_resource type="Texture2D" uid="uid://ct0m63p3rt1gj" path="res://game_objects/enemies/enemy_sprites/spaceShips_008_s.png" id="4_lea6s"]
-[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://test_obj/ray_component/rays.tscn" id="6_bklmb"]
+[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://game_objects/enemies/ray_component/rays.tscn" id="6_bklmb"]
 [ext_resource type="Script" uid="uid://bgpiccp33m7pl" path="res://game_objects/enemies/scripts/enemy_type_8_trail_script.gd" id="6_qo3ys"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_bnpbt"]

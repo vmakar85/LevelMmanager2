@@ -2,6 +2,7 @@ class_name PowerupResource
 extends Resource
 
 enum PowerupType {
+	EMPTY,
 	HEALUP,
 	MOVESPEEDUP,
 	SHOOTSPEEDUP,

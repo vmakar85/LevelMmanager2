@@ -1,6 +1,6 @@
 extends HBoxContainer
 
-var extended_symbols: Array[PowerupMappingResource]
+var extended_symbols: Array[EnemyOverrideResource]
  
 func _ready() -> void:
 	UiSignalBus.extended_symbol_add.connect(_on_extended_symbol_add)
@@ -17,11 +17,11 @@ func _setup() -> void:
 		button.icon = load(res.get("pic"))
 		button.tooltip_text = res.get("name") + " with powerup : " + key.get_powerup_name()
 		button.expand_icon = true
-		button.text = key.get_key()
-		button.pressed.connect(_on_symbol_button_pressed.bind(key.get_key()))
+		button.text = key.get_enemy_overrided_id()
+		button.pressed.connect(_on_symbol_button_pressed.bind(key.get_enemy_overrided_id()))
 		add_child(button)
 
-func _on_extended_symbol_add(symbol: Array[PowerupMappingResource]):
+func _on_extended_symbol_add(symbol: Array[EnemyOverrideResource]):
 	extended_symbols = symbol
 	_setup()
 

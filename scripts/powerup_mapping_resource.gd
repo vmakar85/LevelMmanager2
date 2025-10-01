@@ -5,11 +5,7 @@ class_name PowerupMappingResource
 @export var enemy_id: String = "0"
 @export var powerup: PowerupResource
 
-func get_key() -> String:
-	return key
 
-func get_enemy_id() -> String:
-	return enemy_id
 
 ## Как это работает 
 ## берем наш enum в PowerupResource.PowerupType получаем 

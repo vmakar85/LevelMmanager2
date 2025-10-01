@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ct2uscxyleuee" path="res://game_objects/enemies/enemy_sprites/spaceShips_005_d.png" id="2_46huc"]
 [ext_resource type="Texture2D" uid="uid://tw5oi3vjqmr5" path="res://game_objects/enemies/enemy_sprites/spaceShips_005_n.png" id="3_hw8qf"]
 [ext_resource type="Texture2D" uid="uid://cdmwi58gll6ug" path="res://game_objects/enemies/enemy_sprites/spaceShips_005_s.png" id="4_nwsle"]
-[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://test_obj/ray_component/rays.tscn" id="5_g6i0a"]
+[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://game_objects/enemies/ray_component/rays.tscn" id="5_g6i0a"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_vcveo"]
 diffuse_texture = ExtResource("2_46huc")
