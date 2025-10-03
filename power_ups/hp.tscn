@@ -1,8 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://dtffa2a0lnbl5"]
+[gd_scene load_steps=5 format=3 uid="uid://dtffa2a0lnbl5"]
 
-[ext_resource type="Texture2D" uid="uid://iec5lyobnspj" path="res://power_ups/hp.png" id="1_k4cux"]
+[ext_resource type="Texture2D" uid="uid://dqb1uii3vt7ck" path="res://power_ups/hpup.png" id="1_k4cux"]
+[ext_resource type="Script" uid="uid://c5037m3qi6v54" path="res://power_ups/hp.gd" id="1_uiqgh"]
+[ext_resource type="Shader" uid="uid://bgwodu84ywplm" path="res://power_ups/powerupfx.tres" id="2_aeywk"]
 
-[node name="Hp" type="Node2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n0y5x"]
+resource_local_to_scene = true
+shader = ExtResource("2_aeywk")
+shader_parameter/speed = 2.0
+shader_parameter/speed2 = -0.5
 
-[node name="Hp" type="Sprite2D" parent="."]
+[node name="Hp" type="CharacterBody2D"]
+script = ExtResource("1_uiqgh")
+
+[node name="Hpup" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_n0y5x")
 texture = ExtResource("1_k4cux")

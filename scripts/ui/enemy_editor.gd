@@ -3,9 +3,7 @@ extends MarginContainer
 
 @onready var main_tab_container: TabContainer = $Panel/MainTabContainer
 
-
 var formation_res: FormationResource2
-var available_powerups: Array = ["shield", "double_shot", "extra_life", "bomb", "speed_boost"] # Можно вынести в Resources
 
 func _ready() -> void:
 	UiSignalBus.enemy_editor_refresh.connect(_on_enemy_editor_refresh)

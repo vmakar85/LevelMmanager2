@@ -39,7 +39,7 @@ func _process(_delta: float) -> void:
 
 func get_available_symbol() -> String:
 	for s in letters:
-		if formation_res.get_powerup_by_key(s) == null:
+		if formation_res.get_override_by_key(s) == null:
 			return s
 	return "No available symble"
 
@@ -84,14 +84,24 @@ func _on_option_button_item_selected(index: int) -> void:
 
 func _on_confirmed() -> void:
 	# видимо самое простое будет создовать прям сруз всё оверрайды исходя из наминалов базы
-	# а потом докидывать powerup
-	var new_enemy_powerup = PowerupMappingResource.new() # <- вот тут создаем на сонове того что нам изветсно
+	# а потом докидывать powerup #
 	var new_enemy_override = EnemyOverrideResource.new()
 
+	#@export var enemy_id: String = "0"
+	#@export var enemy_overrided_id: String = "A"
+	#@export var health: int = -1
+	#@export var points: int = -1
+	#@export var self_name: String = ""
+	#@export var powerup: PowerupResource
+
 	new_enemy_override.enemy_id = new_symbol
-	new_enemy_powerup.enemy_id = new_symbol
-	new_enemy_powerup.powerup = selected_powerup
-	formation_res.powerup_mapping.append(new_enemy_powerup)
+	new_enemy_override.enemy_overrided_id = new_symbol
+	new_enemy_override.powerup = selected_powerup
+	new_enemy_override.health = current_hp_amount
+	new_enemy_override.points = current_p_amount
+	
+	formation_res.enemy_overrides.append(new_enemy_override)
+
 	UiSignalBus.emit_enemy_editor_refrehs(formation_res)
 	if current_hp_amount == 0: 
 		print("warning")

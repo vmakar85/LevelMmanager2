@@ -1,11 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://cx85mcv4alstb"]
+[gd_scene load_steps=28 format=3 uid="uid://cx85mcv4alstb"]
 
 [ext_resource type="Script" uid="uid://k1isg5n2xfky" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://qcs0jq4i0qna" path="res://scripts/level_manager_2.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://dmwfoldm2rbqh" path="res://scripts/ui/ui_root.gd" id="3_4c57u"]
 [ext_resource type="Texture2D" uid="uid://rm8el386nhdu" path="res://ui_elements/crosshair042.png" id="3_lquwl"]
+[ext_resource type="Shader" uid="uid://dnr3mlj7g84cf" path="res://game_objects/world/star_field_v2.gdshader" id="4_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bdeq381pl8bmi" path="res://ui_elements/enemies/enemy_sprites/spaceShips_007_d.png" id="4_7mycd"]
 [ext_resource type="Script" uid="uid://tvju8mm3o38g" path="res://scripts/ui/grid_editor.gd" id="6_efxa6"]
+[ext_resource type="Script" uid="uid://cm1ovc3u7gsre" path="res://scripts/ui/power_up_taggle.gd" id="6_vivmo"]
 [ext_resource type="Script" uid="uid://bjblt33a7cfl1" path="res://scripts/ui/standart_symbols_container.gd" id="7_4c57u"]
 [ext_resource type="Script" uid="uid://enfihuxjtjxw" path="res://scripts/ui/enemy_editor.gd" id="7_272bh"]
 [ext_resource type="Script" uid="uid://baoblnlnvqifm" path="res://scripts/ui/extended_symbols_container.gd" id="8_efxa6"]
@@ -14,6 +16,49 @@
 [ext_resource type="PackedScene" uid="uid://bu8safbwuv5v1" path="res://ui_elements/fork_container.tscn" id="11_w48qg"]
 [ext_resource type="Script" uid="uid://cedgc7p8w0bo5" path="res://scripts/powerup_resource.gd" id="12_ycdy4"]
 [ext_resource type="Resource" uid="uid://b0m40ctlsi5ps" path="res://power_ups/hpup.tres" id="13_w48qg"]
+
+[sub_resource type="Curve2D" id="Curve2D_vivmo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 219, -34, 0, 0, 0, 0, 1063, -34)
+}
+point_count = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2cqfq"]
+noise_type = 0
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yaehf"]
+noise = SubResource("FastNoiseLite_2cqfq")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yaehf"]
+shader = ExtResource("4_2cqfq")
+shader_parameter/res = Vector2(1280, 720)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_yaehf")
+shader_parameter/density = 40.0
+shader_parameter/layers = 4
+shader_parameter/star_radius = 0.09999999776481
+shader_parameter/jitter = 0.62999998591824
+shader_parameter/threshold = 0.78
+shader_parameter/speed_x = 0.0
+shader_parameter/speed_y = -50.0
+shader_parameter/speed_scale = 10.000000149012
+shader_parameter/color_near = Color(1, 0.96, 0.9, 1)
+shader_parameter/color_far = Color(0.75, 0.85, 1, 1)
+shader_parameter/global_brightness = 1.0
+shader_parameter/use_alpha = true
+shader_parameter/rare_chance = 0.029999999241
+shader_parameter/rare_size = 0.00999999977648
+shader_parameter/rare_brightness = 0.30000000447036
+shader_parameter/rare_color = Color(1, 0.98, 0.92, 1)
+shader_parameter/rare_jitter = 0.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yaehf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_074og"]
+width = 1280
+height = 720
+noise = SubResource("FastNoiseLite_yaehf")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
 size = Vector2(200, 720)
@@ -48,11 +93,23 @@ shadow_offset = Vector2(5, 5)
 [node name="WorldScene" type="Node2D"]
 script = ExtResource("1_0xm2m")
 
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_vivmo")
+script = ExtResource("6_vivmo")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(219, -34)
+
 [node name="GameRoot" type="Node2D" parent="."]
 
 [node name="LevelManager2" type="Node2D" parent="."]
 script = ExtResource("2_h2yge")
 metadata/_custom_type_script = "uid://qcs0jq4i0qna"
+
+[node name="bg" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_yaehf")
+texture = SubResource("NoiseTexture2D_074og")
+centered = false
 
 [node name="EnemiesContainer" type="Node" parent="."]
 
@@ -233,6 +290,24 @@ grow_vertical = 2
 [node name="Panel" type="Panel" parent="UIRoot/right"]
 layout_mode = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/right/Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -66.0
+offset_right = 66.0
+offset_bottom = 41.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Button" type="CheckButton" parent="UIRoot/right/Panel/MarginContainer"]
+layout_mode = 2
+text = "Power Up Rain"
+
 [node name="CenterGridEditor" type="MarginContainer" parent="UIRoot"]
 unique_name_in_owner = true
 visible = false
@@ -335,6 +410,7 @@ layout_mode = 2
 
 [node name="CenterEnemyEditor" type="MarginContainer" parent="UIRoot"]
 unique_name_in_owner = true
+visible = false
 custom_minimum_size = Vector2(880, 600)
 anchors_preset = 8
 anchor_left = 0.5
@@ -631,6 +707,7 @@ size_flags_vertical = 4
 [connection signal="value_changed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer/down_movement_speed_slider" to="UIRoot" method="_on_down_movement_speed_slider_value_changed"]
 [connection signal="pressed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer3/VBoxContainer/Edit formation" to="UIRoot" method="_on_edit_formation_pressed"]
 [connection signal="pressed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4/VBoxContainer/Edit enemies" to="UIRoot" method="_on_edit_enemies_pressed"]
+[connection signal="toggled" from="UIRoot/right/Panel/MarginContainer/Button" to="Path2D" method="_on_button_toggled"]
 [connection signal="index_pressed" from="UIRoot/CenterTop/MenuBar/File" to="." method="_on_file_index_pressed"]
 [connection signal="file_selected" from="UIRoot/SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
 [connection signal="confirmed" from="UIRoot/CreateNewEnemyDialog" to="UIRoot/CreateNewEnemyDialog" method="_on_confirmed"]
