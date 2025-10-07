@@ -1,0 +1,161 @@
+[gd_scene load_steps=22 format=3 uid="uid://puh2yf2cadp3"]
+
+[ext_resource type="Script" uid="uid://cnc67j62bbhqv" path="res://runtime/ingame_objects/enemies/scripts/enemy_type_3.gd" id="1_30cxk"]
+[ext_resource type="Texture2D" uid="uid://dq0l6veyk2a7x" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_003_d.png" id="2_xyuqv"]
+[ext_resource type="Texture2D" uid="uid://22q37gga0xge" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_003_n.png" id="3_18uqn"]
+[ext_resource type="Texture2D" uid="uid://e0sjjfmfroog" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_003_s.png" id="4_t1led"]
+[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://runtime/ingame_objects/enemies/ray_component/rays.tscn" id="5_rjgbj"]
+
+[sub_resource type="Gradient" id="Gradient_e11l0"]
+offsets = PackedFloat32Array(0, 0.313158, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.102632, 0.102632, 0.102632, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xyuqv"]
+gradient = SubResource("Gradient_e11l0")
+use_hdr = true
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_30cxk"]
+offsets = PackedFloat32Array(0, 0.246575, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.917808, 0.917808, 0.917808, 0.917808, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e11l0"]
+gradient = SubResource("Gradient_30cxk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.3, 0.7)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_30cxk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_e11l0"]
+curve = SubResource("Curve_30cxk")
+
+[sub_resource type="Gradient" id="Gradient_xyuqv"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.0565476, 0.119048, 0.264881, 1)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.701351, 0.0379109, 1, 1, 0.256009, 0.0138383, 1, 0.41662, 0.0304484, 0.00164586, 1, 0.0117647, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xyuqv"]
+gradient = SubResource("Gradient_xyuqv")
+use_hdr = true
+
+[sub_resource type="Curve" id="Curve_t1led"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0.0353261, 12.8), 0.0, 0.0, 0, 0, Vector2(1, -200), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_18uqn"]
+curve = SubResource("Curve_t1led")
+
+[sub_resource type="Curve" id="Curve_3gch4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.366848, 0.28527), -0.310166, -0.310166, 0, 0, Vector2(1, 0.069502), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t1led"]
+curve = SubResource("Curve_3gch4")
+
+[sub_resource type="Curve" id="Curve_e11l0"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 50.778), 0.0, -5.56277, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_j4f3n"]
+curve = SubResource("Curve_e11l0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vstie"]
+resource_local_to_scene = true
+direction = Vector3(0, -1, 0)
+spread = 0.0
+velocity_limit_curve = SubResource("CurveTexture_j4f3n")
+gravity = Vector3(0, 0, 0)
+linear_accel_min = 61.0
+linear_accel_max = 100.0
+linear_accel_curve = SubResource("CurveTexture_18uqn")
+radial_accel_min = -100.0
+radial_accel_max = -33.71
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 29.21
+scale_min = 0.0
+scale_max = 0.7
+scale_curve = SubResource("CurveTexture_t1led")
+scale_over_velocity_max = 1.0
+color_ramp = SubResource("GradientTexture1D_xyuqv")
+alpha_curve = SubResource("CurveTexture_e11l0")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_j4f3n"]
+diffuse_texture = ExtResource("2_xyuqv")
+normal_texture = ExtResource("3_18uqn")
+specular_texture = ExtResource("4_t1led")
+
+[node name="EnemyRedType3" type="CharacterBody2D"]
+light_mask = 0
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 45
+script = ExtResource("1_30cxk")
+points = 15
+self_name = "diving_ship"
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, 71)
+rotation = 3.14159
+scale = Vector2(0.4375, 0.96875)
+color = Color(1, 0, 0, 1)
+energy = 16.0
+range_item_cull_mask = 2
+texture = SubResource("GradientTexture2D_xyuqv")
+
+[node name="CPUParticles2D" type="GPUParticles2D" parent="."]
+light_mask = 2
+position = Vector2(0, 43.21)
+rotation = 3.14159
+emitting = false
+amount = 32
+texture = SubResource("GradientTexture2D_e11l0")
+lifetime = 2.0
+speed_scale = 20.0
+explosiveness = 1.0
+fixed_fps = 60
+local_coords = true
+trail_enabled = true
+trail_lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_vstie")
+
+[node name="EnemyRed3" type="Sprite2D" parent="."]
+rotation = 3.14159
+texture = SubResource("CanvasTexture_j4f3n")
+
+[node name="enemy" type="Area2D" parent="."]
+visible = false
+rotation = 3.14159
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="enemy"]
+polygon = PackedVector2Array(-48, -42, -32, -42, -16, -32, 16, -32, 32, -42, 48, -42, 30, 26, 20, 26, 14, 42, -14, 42, -20, 26, -30, 26)
+
+[node name="SafeArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SafeArea"]
+position = Vector2(0, -50)
+polygon = PackedVector2Array(65, -40, 0, 0, -65, -40, -100, -105, 100, -105)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+rotation = 3.14159
+polygon = PackedVector2Array(-48, -42, -32, -42, -16, -32, 16, -32, 32, -42, 48, -42, 30, 26, 20, 26, 14, 42, -14, 42, -20, 26, -30, 26)
+
+[node name="Rays" parent="." instance=ExtResource("5_rjgbj")]
+scale = Vector2(1.255, 1.255)
+
+[connection signal="area_entered" from="enemy" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="SafeArea" to="." method="_on_safe_area_body_entered"]
+[connection signal="body_exited" from="SafeArea" to="." method="_on_safe_area_body_exited"]

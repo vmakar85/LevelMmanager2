@@ -1,0 +1,131 @@
+[gd_scene load_steps=24 format=3 uid="uid://b3yp4yfb24cg5"]
+
+[ext_resource type="Script" uid="uid://c4i4qtnuockqw" path="res://runtime/ingame_objects/enemies/enemy_fx/explosion/explosion.gd" id="1_2ckhv"]
+
+[sub_resource type="Gradient" id="Gradient_4euqq"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_117bx"]
+gradient = SubResource("Gradient_4euqq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.2, 0.8)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_4pxs0"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_0pgur"]
+gradient = SubResource("Gradient_4pxs0")
+
+[sub_resource type="Gradient" id="Gradient_gkkkt"]
+offsets = PackedFloat32Array(0, 0.535433, 1)
+colors = PackedColorArray(1.00158, 0.965895, 0.948632, 1, 1.03, 0.352, 0.024, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8c5ty"]
+gradient = SubResource("Gradient_gkkkt")
+
+[sub_resource type="Curve" id="Curve_a4kda"]
+_data = [Vector2(0, 0.000454903), 0.0, 0.0, 0, 0, Vector2(0.508475, 0.958599), 0.0, 0.0, 0, 0, Vector2(0.946731, 0.0359417), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_rx8ep"]
+curve = SubResource("Curve_a4kda")
+
+[sub_resource type="Curve" id="Curve_yhmfx"]
+_data = [Vector2(0.992736, 0.333641), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="Curve" id="Curve_t8bvb"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_xhuwk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_14sbk"]
+curve_x = SubResource("Curve_yhmfx")
+curve_y = SubResource("Curve_t8bvb")
+curve_z = SubResource("Curve_xhuwk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4flkd"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 394.39
+initial_velocity_max = 422.48
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.5
+scale_curve = SubResource("CurveXYZTexture_14sbk")
+color = Color(1.03, 0.352, 0.024, 1)
+color_ramp = SubResource("GradientTexture1D_8c5ty")
+color_initial_ramp = SubResource("GradientTexture1D_0pgur")
+emission_curve = SubResource("CurveTexture_rx8ep")
+
+[sub_resource type="Gradient" id="Gradient_furpn"]
+colors = PackedColorArray(1, 0.968627, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qq0lg"]
+gradient = SubResource("Gradient_furpn")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.2)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_gjsas"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.501618, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_mm7h1"]
+curve = SubResource("Curve_gjsas")
+
+[sub_resource type="Gradient" id="Gradient_7mmu0"]
+offsets = PackedFloat32Array(0.1, 0.3, 0.7, 0.9)
+colors = PackedColorArray(1, 1, 1, 0.498039, 1, 0.465704, 0.465704, 0.498039, 1, 0, 0, 0.498039, 1, 0.821901, 0.821901, 0.498039)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tmfjd"]
+gradient = SubResource("Gradient_7mmu0")
+
+[sub_resource type="Curve" id="Curve_naaqx"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_m2wkk"]
+curve = SubResource("Curve_naaqx")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5umxg"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 5.0
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_m2wkk")
+color = Color(1, 1, 1, 0.352941)
+color_ramp = SubResource("GradientTexture1D_tmfjd")
+alpha_curve = SubResource("CurveTexture_mm7h1")
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_2ckhv")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 24
+texture = SubResource("GradientTexture2D_117bx")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_4flkd")
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 1
+texture = SubResource("GradientTexture2D_qq0lg")
+lifetime = 0.1
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_5umxg")
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

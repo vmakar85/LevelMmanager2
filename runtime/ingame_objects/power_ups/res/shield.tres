@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PowerupResource" load_steps=2 format=3 uid="uid://cnlqjjcovbsrm"]
+
+[ext_resource type="Script" uid="uid://cedgc7p8w0bo5" path="res://runtime/scripts/powerup_resource.gd" id="1_mhj7b"]
+
+[resource]
+script = ExtResource("1_mhj7b")
+metadata/_custom_type_script = "uid://cedgc7p8w0bo5"

@@ -1,0 +1,98 @@
+[gd_scene load_steps=10 format=3 uid="uid://c8sn8w5lhuuff"]
+
+[ext_resource type="Script" uid="uid://c8n8jcf87tdk4" path="res://runtime/ingame_objects/enemies/enemy_gear/simple_plasma_wave_projectile/simple_plasma_wave_projectile.gd" id="1_leymf"]
+[ext_resource type="Texture2D" uid="uid://bxvr0w3wn3u5u" path="res://runtime/ingame_objects/enemies/enemy_gear/simple_plasma_wave_projectile/simple_plasma_wave_projectile.png" id="2_leymf"]
+
+[sub_resource type="Gradient" id="Gradient_2lesp"]
+offsets = PackedFloat32Array(0, 0.0763052)
+colors = PackedColorArray(1, 0, 0, 1, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hrdas"]
+gradient = SubResource("Gradient_2lesp")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[sub_resource type="Curve" id="Curve_5p7oc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_srnow"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 0.0666667)
+
+[sub_resource type="Gradient" id="Gradient_q2x68"]
+offsets = PackedFloat32Array(0, 0.412245, 0.559184, 0.706122)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.00163075, 0.138614, 1, 1, 0.0117647, 1, 1, 1, 0.000400535, 0.0340455, 1)
+
+[sub_resource type="Gradient" id="Gradient_hfdcl"]
+offsets = PackedFloat32Array(0.4, 0.5, 0.7, 1)
+colors = PackedColorArray(0.0467409, 0.0467409, 0.0467409, 0, 0.980392, 0.980392, 0.980392, 0.501961, 0.105882, 0.105882, 0.105882, 0, 0, 0, 0, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cgser"]
+gradient = SubResource("Gradient_hfdcl")
+width = 128
+height = 80
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+metadata/_snap_enabled = true
+
+[node name="WaveProjectile" type="CharacterBody2D"]
+light_mask = 2
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("1_leymf")
+
+[node name="GPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 28
+texture = SubResource("GradientTexture2D_hrdas")
+randomness = 1.0
+lifetime_randomness = 0.49
+fixed_fps = 60
+emission_shape = 4
+emission_points = PackedVector2Array(5, -2, -5, -2, 10, -2, -10, -2, 15, -2, -15, -2)
+emission_colors = PackedColorArray()
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 5.0
+angular_velocity_max = 100.0
+orbit_velocity_min = -0.1
+orbit_velocity_max = 0.1
+radial_accel_max = 0.1
+tangential_accel_min = -50.0
+tangential_accel_max = 50.0
+damping_max = 50.0
+scale_amount_min = 0.0
+scale_amount_curve = SubResource("Curve_5p7oc")
+color = Color(1, 0, 0, 1)
+color_ramp = SubResource("Gradient_srnow")
+color_initial_ramp = SubResource("Gradient_q2x68")
+
+[node name="wave" type="Sprite2D" parent="."]
+visibility_layer = 2
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_leymf")
+region_rect = Rect2(58, 57, 12, 3)
+
+[node name="EnemyBullet" type="Area2D" parent="."]
+rotation = 1.5708
+collision_layer = 8
+collision_mask = 5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EnemyBullet"]
+polygon = PackedVector2Array(0.999935, -18, 1.00007, 18, -0.999935, 18, -1.00007, -18)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+light_mask = 524288
+color = Color(1, 0, 0, 1)
+energy = 16.0
+texture = SubResource("GradientTexture2D_cgser")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+rotation = 1.5708
+polygon = PackedVector2Array(0.999935, -18, 1.00007, 18, -0.999935, 18, -1.00007, -18)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm7vvionpsdhc"]
+
+[ext_resource type="Script" uid="uid://cpy1g7ks5jstx" path="res://runtime/ingame_objects/enemies/enemy_gear/simple_plasma_projectile/simple_plasma_projectile.gd" id="1_r2ds7"]
+[ext_resource type="Texture2D" uid="uid://c6mvigarmy8iq" path="res://runtime/ingame_objects/enemies/enemy_gear/simple_plasma_projectile/simple_plasma_projectile.png" id="2_nc7pp"]
+
+[sub_resource type="Gradient" id="Gradient_6wip1"]
+offsets = PackedFloat32Array(0.0681115, 0.331269, 0.585139, 0.904025)
+colors = PackedColorArray(0.850896, 0.850896, 0.850896, 1, 0.57754, 0.57754, 0.57754, 1, 1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0qjqd"]
+gradient = SubResource("Gradient_6wip1")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.1, 0.9)
+metadata/_snap_enabled = true
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6wip1"]
+radius = 5.735
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j6cmb"]
+
+[node name="Bullet" type="CharacterBody2D"]
+script = ExtResource("1_r2ds7")
+
+[node name="02" type="Sprite2D" parent="."]
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_nc7pp")
+flip_h = true
+
+[node name="Light" type="PointLight2D" parent="."]
+color = Color(1, 0, 0, 1)
+energy = 16.0
+texture = SubResource("GradientTexture2D_0qjqd")
+texture_scale = 2.0
+
+[node name="EnemyBullet" type="Area2D" parent="."]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyBullet"]
+position = Vector2(0, -2)
+shape = SubResource("CircleShape2D_6wip1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_j6cmb")
+disabled = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

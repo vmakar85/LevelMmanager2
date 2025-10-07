@@ -1,0 +1,57 @@
+[gd_scene load_steps=7 format=3 uid="uid://chj4xaekhs4t3"]
+
+[ext_resource type="Script" uid="uid://cduvfbbrfdmmd" path="res://runtime/ingame_objects/enemies/scripts/enemy_type_4.gd" id="1_50wlv"]
+[ext_resource type="Texture2D" uid="uid://dvm24ba6dvu63" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_004_d.png" id="2_rjuvf"]
+[ext_resource type="Texture2D" uid="uid://qcibp2rlrw2g" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_004_n.png" id="3_2gpmb"]
+[ext_resource type="Texture2D" uid="uid://dvcm0rshypome" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_004_s.png" id="4_jqpt5"]
+[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://runtime/ingame_objects/enemies/ray_component/rays.tscn" id="5_43tax"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jeeeb"]
+diffuse_texture = ExtResource("2_rjuvf")
+normal_texture = ExtResource("3_2gpmb")
+specular_texture = ExtResource("4_jqpt5")
+
+[node name="EnemyRedType4" type="CharacterBody2D"]
+scale = Vector2(0.5, 0.5)
+collision_layer = 2
+collision_mask = 45
+script = ExtResource("1_50wlv")
+self_name = "double_shot_ship"
+
+[node name="EnemyRed4" type="Sprite2D" parent="."]
+rotation = 3.14159
+texture = SubResource("CanvasTexture_jeeeb")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+rotation = 3.14159
+polygon = PackedVector2Array(20, -32, 54, -32, 54, -16, 62, -2, 64, 4, 64, 22, 42, 52, 30, 46, 12, 26, -12, 26, -30, 46, -42, 52, -64, 22, -64, 4, -62, -2, -54, -16, -54, -32, -22, -32, -16, -28, 0, -42, 14, -28)
+
+[node name="enemy" type="Area2D" parent="."]
+visible = false
+rotation = 3.14159
+collision_layer = 2
+collision_mask = 5
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="enemy"]
+polygon = PackedVector2Array(20, -32, 54, -32, 54, -16, 62, -2, 64, 4, 64, 22, 42, 52, 30, 46, 12, 26, -12, 26, -30, 46, -42, 52, -64, 22, -64, 4, -62, -2, -54, -16, -54, -32, -22, -32, -16, -28, 0, -42, 14, -28)
+
+[node name="SafeArea" type="Area2D" parent="."]
+visible = false
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SafeArea"]
+visible = false
+position = Vector2(0, -50)
+polygon = PackedVector2Array(65, -40, 0, 0, -65, -40, -100, -105, 100, -105)
+
+[node name="GunMarker2D" type="Marker2D" parent="."]
+position = Vector2(0, -52)
+
+[node name="Rays" parent="." instance=ExtResource("5_43tax")]
+scale = Vector2(1.56, 1.56)
+
+[connection signal="area_entered" from="enemy" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="SafeArea" to="." method="_on_safe_area_body_entered"]
+[connection signal="body_exited" from="SafeArea" to="." method="_on_safe_area_body_exited"]
