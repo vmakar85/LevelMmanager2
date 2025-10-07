@@ -16,6 +16,7 @@ func _ready():
 
 func setup(formation: FormationResource2):
 	formation_res = formation
+	UiSignalBus.emit_refresh_formation(formation_res)
 	_update(formation_res)
 
 func _update(formation: FormationResource2):
@@ -119,5 +120,9 @@ func _on_symbol_selected(symbol: String):
 	selected_symbol = symbol
 
 func _on_refresh_button_pressed():
+	UiSignalBus.emit_refresh_formation(formation_res)
+	_update(formation_res)
+
+func _on_draw() -> void:
 	UiSignalBus.emit_refresh_formation(formation_res)
 	_update(formation_res)

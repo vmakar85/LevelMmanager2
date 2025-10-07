@@ -148,5 +148,13 @@ func get_overrides_by_key(key: String) -> Array[EnemyOverrideResource]:
 		if ov.enemy_id == key:
 			overrides.append(ov)
 	return overrides
-	
+
+func delete_overrides_by_key(key: String) -> Array[EnemyOverrideResource]:
+	var overrides: Array[EnemyOverrideResource] = []
+	for ov in enemy_overrides:
+		if ov.enemy_overrided_id != key:
+			overrides.append(ov)
+	enemy_overrides = overrides
+	return enemy_overrides  
+
 #endregion

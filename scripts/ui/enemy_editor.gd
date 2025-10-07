@@ -60,8 +60,8 @@ func _update() -> void:
 		vbox_controls.name = "vbox_controls" + s
 		edit_cnt.add_child(vbox_controls)
 
-		var edit_base_btn = create_button(vbox_controls,"edit_base_btn" + s, "Edit base")
-		edit_base_btn.pressed.connect(_on_edit_base_button_pressed.bind(s))
+		#var edit_base_btn = create_button(vbox_controls,"edit_base_btn" + s, "Edit base")
+		#edit_base_btn.pressed.connect(_on_edit_base_button_pressed.bind(s))
 
 		var add_new_btn = create_button(vbox_controls,"add_new_btn" + s, "Add fork")
 		add_new_btn.pressed.connect(_on_add_new_button_pressed.bind(s))
@@ -75,10 +75,10 @@ func _update() -> void:
 		# получаем список всех перегрузок для уникального ключа enemy_id
 		var overrides = formation_res.get_overrides_by_key(s)
 		for ovr in overrides:
-			var o_enemy_id = ovr.get_enemy_id()
+			#var o_enemy_id = ovr.get_enemy_id()
 			var o_overrided_id = ovr.get_enemy_overrided_id()
-			var o_health = ovr.get_health()
-			var o_points = ovr.get_points()
+			#var o_health = ovr.get_health()
+			#var o_points = ovr.get_points()
 			var o_powerup_name = ovr.get_powerup_name()
 			
 			var fork_cnt_panel = PanelContainer.new()
@@ -94,8 +94,16 @@ func _update() -> void:
 			var powerup_label = Label.new()
 			powerup_label.text = "Powerup: %s" % o_powerup_name
 			vbox.add_child(powerup_label)
-			create_button(vbox,"del_btn" + s, "Delete fork %s " % o_overrided_id)
+			var button = create_button(vbox,"del_btn" + s, "Delete fork %s " % o_overrided_id)
+			button.pressed.connect(_on_delete_button.bind(o_overrided_id))
 #endregion
+
+func _on_delete_button(o_overrided_id):
+	print(o_overrided_id)
+	var newoer = formation_res.delete_overrides_by_key(o_overrided_id)
+	formation_res.enemy_overrides = newoer
+	setup(formation_res)
+	setup(formation_res)
 
 func _full_rect(node: Control) -> void:
 	node.set_anchors_preset(LayoutPreset.PRESET_FULL_RECT)

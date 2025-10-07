@@ -94,7 +94,7 @@ func _on_confirmed() -> void:
 	#@export var self_name: String = ""
 	#@export var powerup: PowerupResource
 
-	new_enemy_override.enemy_id = new_symbol
+	new_enemy_override.enemy_id = base_enemy_id
 	new_enemy_override.enemy_overrided_id = new_symbol
 	new_enemy_override.powerup = selected_powerup
 	new_enemy_override.health = current_hp_amount

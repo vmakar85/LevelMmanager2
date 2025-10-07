@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="LevelResource2" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemy_override_resource.gd" id="1_wpy7e"]
+[ext_resource type="Resource" path="res://power_ups/hpup.tres" id="2_yva6a"]
+[ext_resource type="Script" path="res://scripts/formation_resource_2.gd" id="3_wk6iw"]
+[ext_resource type="Script" path="res://scripts/level_resource_2.gd" id="4_rm62t"]
+
+[sub_resource type="Resource" id="Resource_b3owp"]
+script = ExtResource("1_wpy7e")
+health = 10
+points = 25
+powerup = ExtResource("2_yva6a")
+metadata/_custom_type_script = "uid://dahrvmpvdre0x"
+
+[sub_resource type="Resource" id="Resource_n5uce"]
+script = ExtResource("1_wpy7e")
+enemy_overrided_id = "B"
+health = 30
+points = 150
+powerup = ExtResource("2_yva6a")
+metadata/_custom_type_script = "uid://dahrvmpvdre0x"
+
+[sub_resource type="Resource" id="Resource_0wvtu"]
+script = ExtResource("1_wpy7e")
+enemy_id = "1"
+enemy_overrided_id = "F"
+health = 14
+points = 44
+powerup = ExtResource("2_yva6a")
+metadata/_custom_type_script = "uid://dahrvmpvdre0x"
+
+[sub_resource type="Resource" id="Resource_ke8vb"]
+script = ExtResource("3_wk6iw")
+ascii_layout = Array[String](["*0*0*", "*A*"])
+movement_speed = 6.0
+shift_down_speed = 1.0
+enemy_overrides = Array[ExtResource("1_wpy7e")]([SubResource("Resource_b3owp"), SubResource("Resource_n5uce"), SubResource("Resource_0wvtu")])
+metadata/_custom_type_script = "uid://1p6q0f2gw1cf"
+
+[resource]
+script = ExtResource("4_rm62t")
+formation = SubResource("Resource_ke8vb")

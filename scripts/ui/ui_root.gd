@@ -3,7 +3,6 @@ extends CanvasLayer
 @onready var grid_editor: MarginContainer = %CenterGridEditor
 @onready var enemy_editor: MarginContainer = %CenterEnemyEditor
 
-
 func _ready() -> void:
 	UiSignalBus.formation_updated.connect(_on_formation_updated)
 	#%infoPanel.visible = false

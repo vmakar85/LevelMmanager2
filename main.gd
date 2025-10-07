@@ -44,6 +44,10 @@ func _save_resource_to_file(resource_instance: LevelResource2, file_path: String
 	# Важно: resource_instance - это экземпляр вашего MyRes, который мы создали и редактировали
 	# file_path - это полный путь, куда сохранить, например: "user://my_save.tres"
 	# Используем встроенный метод ResourceSaver
+	print("Saving to: ", file_path)
+	print("Exists dir: ", DirAccess.dir_exists_absolute(file_path.get_base_dir()))
+	if not file_path.ends_with(".tres") and not file_path.ends_with(".res"):
+		file_path += ".tres"
 	var error_code = ResourceSaver.save(resource_instance, file_path)
 	# Проверяем, успешно ли прошло сохранение
 	if error_code == OK:
@@ -69,8 +73,7 @@ func _create_new_lvl() -> void:
 	powerup.scene = preload("uid://dtffa2a0lnbl5")
 
 	entry.powerup = powerup
-	
-	new_formation.powerup_mapping.append(entry)   
+	  
 	new_formation.enemy_overrides.append(EnemyOverrideResource.new())
 
 	new_lvl.formation = new_formation  

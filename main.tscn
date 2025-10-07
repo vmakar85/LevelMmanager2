@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://cx85mcv4alstb"]
+[gd_scene load_steps=34 format=3 uid="uid://cx85mcv4alstb"]
 
 [ext_resource type="Script" uid="uid://k1isg5n2xfky" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://qcs0jq4i0qna" path="res://scripts/level_manager_2.gd" id="2_h2yge"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://rm8el386nhdu" path="res://ui_elements/crosshair042.png" id="3_lquwl"]
 [ext_resource type="Shader" uid="uid://dnr3mlj7g84cf" path="res://game_objects/world/star_field_v2.gdshader" id="4_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bdeq381pl8bmi" path="res://ui_elements/enemies/enemy_sprites/spaceShips_007_d.png" id="4_7mycd"]
+[ext_resource type="Script" uid="uid://ccube3o7akv8e" path="res://scripts/bg.gd" id="5_yaehf"]
 [ext_resource type="Script" uid="uid://tvju8mm3o38g" path="res://scripts/ui/grid_editor.gd" id="6_efxa6"]
 [ext_resource type="Script" uid="uid://cm1ovc3u7gsre" path="res://scripts/ui/power_up_taggle.gd" id="6_vivmo"]
 [ext_resource type="Script" uid="uid://bjblt33a7cfl1" path="res://scripts/ui/standart_symbols_container.gd" id="7_4c57u"]
@@ -16,6 +17,11 @@
 [ext_resource type="PackedScene" uid="uid://bu8safbwuv5v1" path="res://ui_elements/fork_container.tscn" id="11_w48qg"]
 [ext_resource type="Script" uid="uid://cedgc7p8w0bo5" path="res://scripts/powerup_resource.gd" id="12_ycdy4"]
 [ext_resource type="Resource" uid="uid://b0m40ctlsi5ps" path="res://power_ups/hpup.tres" id="13_w48qg"]
+[ext_resource type="Resource" uid="uid://vmai1ik18enw" path="res://power_ups/speedup.tres" id="18_ryguw"]
+[ext_resource type="Resource" uid="uid://dbesg4wenc41t" path="res://power_ups/shoot_speed_up.tres" id="19_d13ii"]
+[ext_resource type="Resource" uid="uid://cnlqjjcovbsrm" path="res://power_ups/shield.tres" id="20_1u8w0"]
+[ext_resource type="Resource" uid="uid://sjlo1u82an40" path="res://power_ups/continue.tres" id="21_0odxb"]
+[ext_resource type="Resource" uid="uid://ch3po6d4mx0p2" path="res://power_ups/shoot_power_up.tres" id="22_lswn8"]
 
 [sub_resource type="Curve2D" id="Curve2D_vivmo"]
 _data = {
@@ -107,9 +113,11 @@ script = ExtResource("2_h2yge")
 metadata/_custom_type_script = "uid://qcs0jq4i0qna"
 
 [node name="bg" type="Sprite2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_yaehf")
 texture = SubResource("NoiseTexture2D_074og")
 centered = false
+script = ExtResource("5_yaehf")
 
 [node name="EnemiesContainer" type="Node" parent="."]
 
@@ -304,9 +312,16 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
 
-[node name="Button" type="CheckButton" parent="UIRoot/right/Panel/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/right/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="PowerUpRain" type="CheckButton" parent="UIRoot/right/Panel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Power Up Rain"
+
+[node name="InGameBGOnOff" type="CheckButton" parent="UIRoot/right/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Background"
 
 [node name="CenterGridEditor" type="MarginContainer" parent="UIRoot"]
 unique_name_in_owner = true
@@ -512,6 +527,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 
 [node name="EditBaseButton" type="Button" parent="UIRoot/CenterEnemyEditor/Panel/MainTabContainer/SharpShotTest/VBoxContainer/HBoxContainer/EditControll/VBoxContainer"]
+visible = false
 layout_mode = 2
 text = "Edit base"
 
@@ -580,15 +596,15 @@ filters = PackedStringArray("*.tres")
 oversampling_override = 1.0
 title = "Save a lvl"
 initial_position = 2
+access = 2
 root_subfolder = "lvl"
-filters = PackedStringArray("tres")
 
 [node name="CreateNewEnemyDialog" type="ConfirmationDialog" parent="UIRoot"]
 oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(347, 258)
 script = ExtResource("11_efxa6")
-available_powerups = Array[ExtResource("12_ycdy4")]([ExtResource("13_w48qg")])
+available_powerups = Array[ExtResource("12_ycdy4")]([null, ExtResource("13_w48qg"), ExtResource("18_ryguw"), ExtResource("19_d13ii"), ExtResource("20_1u8w0"), ExtResource("21_0odxb"), ExtResource("22_lswn8")])
 
 [node name="MarginContainer" type="MarginContainer" parent="UIRoot/CreateNewEnemyDialog"]
 offset_left = 8.0
@@ -707,7 +723,9 @@ size_flags_vertical = 4
 [connection signal="value_changed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer/down_movement_speed_slider" to="UIRoot" method="_on_down_movement_speed_slider_value_changed"]
 [connection signal="pressed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer3/VBoxContainer/Edit formation" to="UIRoot" method="_on_edit_formation_pressed"]
 [connection signal="pressed" from="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer4/VBoxContainer/Edit enemies" to="UIRoot" method="_on_edit_enemies_pressed"]
-[connection signal="toggled" from="UIRoot/right/Panel/MarginContainer/Button" to="Path2D" method="_on_button_toggled"]
+[connection signal="toggled" from="UIRoot/right/Panel/MarginContainer/VBoxContainer/PowerUpRain" to="Path2D" method="_on_button_toggled"]
+[connection signal="toggled" from="UIRoot/right/Panel/MarginContainer/VBoxContainer/InGameBGOnOff" to="bg" method="_on_in_game_bg_on_off_toggled"]
+[connection signal="draw" from="UIRoot/CenterGridEditor" to="UIRoot/CenterGridEditor" method="_on_draw"]
 [connection signal="index_pressed" from="UIRoot/CenterTop/MenuBar/File" to="." method="_on_file_index_pressed"]
 [connection signal="file_selected" from="UIRoot/SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
 [connection signal="confirmed" from="UIRoot/CreateNewEnemyDialog" to="UIRoot/CreateNewEnemyDialog" method="_on_confirmed"]
