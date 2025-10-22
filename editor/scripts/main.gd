@@ -1,7 +1,7 @@
 extends Node2D
 
 @onready var lm2: LevelManager2 = $LevelManager2
-@onready var file_dialog: FileDialog = $UIRoot/FileDialog
+@onready var file_dialog: FileDialog = $UIRoot/OpenFileDialog
 @onready var save_file_dialog: FileDialog = $UIRoot/SaveFileDialog
 
 var is_move = false
@@ -81,7 +81,6 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 		_save_resource_to_file(level_res, path)
 	else:
 		%WarningPopup.popup()
-
 func _on_file_dialog_file_selected(path: String):
 	get_tree().call_group("enemies", "queue_free")
 	lm2.clear_lvl_res()
@@ -91,5 +90,4 @@ func _on_file_dialog_file_selected(path: String):
 		current_formation = lm2.get_current_formation_info()
 		UiSignalBus.emit_formation_updated(current_formation)
 		# _show_lvl_info(current_formation) # <- в сигнал нах
-
 #endregion

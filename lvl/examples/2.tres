@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="LevelResource2" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://runtime/scripts/enemy_override_resource.gd" id="1_tosn1"]
+[ext_resource type="Script" path="res://runtime/scripts/formation_resource_2.gd" id="2_5meab"]
+[ext_resource type="Script" path="res://runtime/scripts/level_resource_2.gd" id="3_o40ko"]
+
+[sub_resource type="Resource" id="Resource_mxuc7"]
+script = ExtResource("1_tosn1")
+
+[sub_resource type="Resource" id="Resource_1cmgn"]
+script = ExtResource("2_5meab")
+ascii_layout = Array[String](["A", "57875"])
+enemy_overrides = Array[ExtResource("1_tosn1")]([SubResource("Resource_mxuc7")])
+
+[resource]
+script = ExtResource("3_o40ko")
+formation = SubResource("Resource_1cmgn")

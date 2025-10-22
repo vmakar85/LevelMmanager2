@@ -16,11 +16,12 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-SignalBus="*res://runtime/scripts/auto_load/signal_bus.gd"
-Resources="*res://editor/scripts/auto_load/resources.gd"
-Globals="*res://editor/scripts/auto_load/globals.gd"
+SignalBus="*res://runtime/auto_load/ac_signal_bus.gd"
+Resources="*res://editor/auto_load/resources.gd"
+Globals="*res://editor/auto_load/globals.gd"
 UIHelper="*res://editor/scripts/ui/uihelper.gd"
-UiSignalBus="*res://editor/scripts/auto_load/ui_signal_bus.gd"
+UiSignalBus="*res://editor/auto_load/ui_signal_bus.gd"
+AcSignalBus="*res://addons/altarxian_core/runtime/autoload/ac_signal_bus.gd"
 
 [display]
 
@@ -30,7 +31,7 @@ window/size/resizable=false
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/tnowe_extra_controls/plugin.cfg")
+enabled=PackedStringArray("res://addons/altarxian_core/plugin.cfg", "res://addons/gdscript_formatter/GDQuest_GDScript_formatter/plugin.cfg")
 
 [physics]
 

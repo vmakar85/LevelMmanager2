@@ -11,7 +11,7 @@ var is_dead = false
 @export var points: int = 10
 @export var self_name: String = ""
 @export var power_up: String 
-@onready var rays: Node2D = $Rays
+#@onready var rays: Node2D = $Rays
 
 # Добавляем свойство для отслеживания скорости
 var current_speed: float = 0.0
@@ -72,11 +72,11 @@ func update_speed():
 	last_position = global_position
 	last_update_time = current_time
 
-func _physics_process(_delta: float) -> void:
-	if rays.ray_left.is_colliding() or rays.ray_right.is_colliding():
-		var r_collider: Node2D = rays.ray_right.get_collider()
-		var l_collider: Node2D = rays.ray_left.get_collider()
-		if r_collider or l_collider:
-			SignalBus.emit_switch_direction_request()
+#func _physics_process(_delta: float) -> void:
+	#if rays.ray_left.is_colliding() or rays.ray_right.is_colliding():
+		#var r_collider: Node2D = rays.ray_right.get_collider()
+		#var l_collider: Node2D = rays.ray_left.get_collider()
+		#if r_collider or l_collider:
+			#SignalBus.emit_switch_direction_request()
 	
 	

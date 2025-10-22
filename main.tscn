@@ -1,12 +1,12 @@
-[gd_scene load_steps=34 format=3 uid="uid://cx85mcv4alstb"]
+[gd_scene load_steps=27 format=3 uid="uid://cx85mcv4alstb"]
 
 [ext_resource type="Script" uid="uid://k1isg5n2xfky" path="res://editor/scripts/main.gd" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://qcs0jq4i0qna" path="res://runtime/managers/level_manager_2.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://dmwfoldm2rbqh" path="res://editor/scripts/ui/ui_root.gd" id="3_4c57u"]
 [ext_resource type="Texture2D" uid="uid://rm8el386nhdu" path="res://editor/ui/sprites/crosshair.png" id="3_lquwl"]
 [ext_resource type="Shader" uid="uid://dnr3mlj7g84cf" path="res://runtime/ingame_objects/world/star_field_v2.gdshader" id="4_2cqfq"]
 [ext_resource type="Texture2D" uid="uid://bdeq381pl8bmi" path="res://editor/ui/sprites/space_ships_07.png" id="4_7mycd"]
 [ext_resource type="Script" uid="uid://ccube3o7akv8e" path="res://editor/scripts/ui/bg.gd" id="5_yaehf"]
+[ext_resource type="PackedScene" uid="uid://wgo85gqjqxps" path="res://runtime/ingame_objects/world/screan_boarder.tscn" id="6_d13ii"]
 [ext_resource type="Script" uid="uid://tvju8mm3o38g" path="res://editor/scripts/ui/grid_editor.gd" id="6_efxa6"]
 [ext_resource type="Script" uid="uid://cm1ovc3u7gsre" path="res://editor/scripts/ui/power_up_taggle.gd" id="6_vivmo"]
 [ext_resource type="Script" uid="uid://bjblt33a7cfl1" path="res://editor/scripts/ui/standart_symbols_container.gd" id="7_4c57u"]
@@ -15,13 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://diw1mohtu5gxl" path="res://editor/ui/sprites/space_ships_01.png" id="8_vivmo"]
 [ext_resource type="Script" uid="uid://b0qp6dhx453kp" path="res://editor/scripts/ui/create_new_enemy_dialog.gd" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://bu8safbwuv5v1" path="res://editor/scenes/fork_container.tscn" id="11_w48qg"]
-[ext_resource type="Script" uid="uid://cedgc7p8w0bo5" path="res://runtime/scripts/powerup_resource.gd" id="12_ycdy4"]
-[ext_resource type="Resource" uid="uid://b0m40ctlsi5ps" path="res://runtime/ingame_objects/power_ups/res/hpup.tres" id="13_w48qg"]
-[ext_resource type="Resource" uid="uid://vmai1ik18enw" path="res://runtime/ingame_objects/power_ups/res/speedup.tres" id="18_ryguw"]
-[ext_resource type="Resource" uid="uid://dbesg4wenc41t" path="res://runtime/ingame_objects/power_ups/res/shoot_speed_up.tres" id="19_d13ii"]
-[ext_resource type="Resource" uid="uid://cnlqjjcovbsrm" path="res://runtime/ingame_objects/power_ups/res/shield.tres" id="20_1u8w0"]
-[ext_resource type="Resource" uid="uid://sjlo1u82an40" path="res://runtime/ingame_objects/power_ups/res/continue.tres" id="21_0odxb"]
-[ext_resource type="Resource" uid="uid://ch3po6d4mx0p2" path="res://runtime/ingame_objects/power_ups/res/shoot_power_up.tres" id="22_lswn8"]
 
 [sub_resource type="Curve2D" id="Curve2D_vivmo"]
 _data = {
@@ -66,20 +59,19 @@ width = 1280
 height = 720
 noise = SubResource("FastNoiseLite_yaehf")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0xm2m"]
-size = Vector2(200, 720)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
-size = Vector2(200, 720)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
-bg_color = Color(0.152941, 0.152941, 0.152941, 0.803922)
+bg_color = Color(0.16340268, 0.15566656, 0.09239071, 0.8039216)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="Theme" id="Theme_0xm2m"]
+
+[sub_resource type="Theme" id="Theme_ryguw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d13ii"]
+bg_color = Color(0.16470589, 0.15686275, 0.09411765, 0.8039216)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lquwl"]
 bg_color = Color(0.2, 0.2, 0.2, 0.941176)
@@ -108,10 +100,6 @@ position = Vector2(219, -34)
 
 [node name="GameRoot" type="Node2D" parent="."]
 
-[node name="LevelManager2" type="Node2D" parent="."]
-script = ExtResource("2_h2yge")
-metadata/_custom_type_script = "uid://qcs0jq4i0qna"
-
 [node name="bg" type="Sprite2D" parent="."]
 visible = false
 material = SubResource("ShaderMaterial_yaehf")
@@ -121,23 +109,7 @@ script = ExtResource("5_yaehf")
 
 [node name="EnemiesContainer" type="Node" parent="."]
 
-[node name="ScreanBoarder" type="Node" parent="."]
-
-[node name="Left" type="Area2D" parent="ScreanBoarder"]
-collision_layer = 512
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreanBoarder/Left"]
-position = Vector2(100, 360)
-shape = SubResource("RectangleShape2D_0xm2m")
-
-[node name="Right" type="Area2D" parent="ScreanBoarder"]
-position = Vector2(1180, 360)
-collision_layer = 512
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ScreanBoarder/Right"]
-shape = SubResource("RectangleShape2D_h2yge")
+[node name="ScreanBoarder" parent="." instance=ExtResource("6_d13ii")]
 
 [node name="UIRoot" type="CanvasLayer" parent="."]
 script = ExtResource("3_4c57u")
@@ -294,9 +266,11 @@ anchor_bottom = 1.0
 offset_left = -200.0
 grow_horizontal = 0
 grow_vertical = 2
+theme = SubResource("Theme_ryguw")
 
 [node name="Panel" type="Panel" parent="UIRoot/right"]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d13ii")
 
 [node name="MarginContainer" type="MarginContainer" parent="UIRoot/right/Panel"]
 layout_mode = 1
@@ -583,7 +557,7 @@ item_2/id = 3
 item_3/text = "Quit"
 item_3/id = 2
 
-[node name="FileDialog" type="FileDialog" parent="UIRoot"]
+[node name="OpenFileDialog" type="FileDialog" parent="UIRoot"]
 oversampling_override = 1.0
 title = "Open a File"
 initial_position = 2
@@ -591,26 +565,41 @@ ok_button_text = "Open"
 file_mode = 0
 root_subfolder = "lvl"
 filters = PackedStringArray("*.tres")
+hidden_files_toggle_enabled = false
+file_filter_toggle_enabled = false
+file_sort_options_enabled = false
+folder_creation_enabled = false
+favorites_enabled = false
+recent_list_enabled = false
 
 [node name="SaveFileDialog" type="FileDialog" parent="UIRoot"]
+transparent_bg = true
+canvas_item_default_texture_filter = 2
 oversampling_override = 1.0
 title = "Save a lvl"
 initial_position = 2
+unresizable = true
+always_on_top = true
+transparent = true
+display_mode = 1
 access = 2
-root_subfolder = "lvl"
+hidden_files_toggle_enabled = false
+file_filter_toggle_enabled = false
+file_sort_options_enabled = false
+favorites_enabled = false
+recent_list_enabled = false
 
 [node name="CreateNewEnemyDialog" type="ConfirmationDialog" parent="UIRoot"]
 oversampling_override = 1.0
 initial_position = 1
-size = Vector2i(347, 258)
+size = Vector2i(277, 208)
 script = ExtResource("11_efxa6")
-available_powerups = Array[ExtResource("12_ycdy4")]([null, ExtResource("13_w48qg"), ExtResource("18_ryguw"), ExtResource("19_d13ii"), ExtResource("20_1u8w0"), ExtResource("21_0odxb"), ExtResource("22_lswn8")])
 
 [node name="MarginContainer" type="MarginContainer" parent="UIRoot/CreateNewEnemyDialog"]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 339.0
-offset_bottom = 209.0
+offset_right = 2208.0
+offset_bottom = 1615.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer"]
 layout_mode = 2
