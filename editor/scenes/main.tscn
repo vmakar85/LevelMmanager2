@@ -1,0 +1,789 @@
+[gd_scene load_steps=58 format=3 uid="uid://b4s6iihhh6obc"]
+
+[ext_resource type="Script" uid="uid://c1262vvxs0ql4" path="res://editor/scripts/main_game_root.gd" id="1_up5aq"]
+[ext_resource type="Script" uid="uid://4nbcef7oh41n" path="res://addons/altarxian_core/runtime/managers/level_manager.gd" id="1_vwwou"]
+[ext_resource type="Script" uid="uid://23pk1msg50ab" path="res://addons/altarxian_core/runtime/components/screen_borders.gd" id="2_13c7j"]
+[ext_resource type="PackedScene" uid="uid://bn18s78mthlea" path="res://runtime/ingame_objects/enemies/enemy_type_1.tscn" id="3_33xkv"]
+[ext_resource type="Script" uid="uid://cm1ovc3u7gsre" path="res://editor/scripts/ui/power_up_taggle.gd" id="3_tdjuo"]
+[ext_resource type="Shader" uid="uid://dnr3mlj7g84cf" path="res://runtime/ingame_objects/world/star_field_v2.gdshader" id="4_m68dc"]
+[ext_resource type="PackedScene" uid="uid://dajvc00tejtjy" path="res://runtime/ingame_objects/enemies/enemy_type_2.tscn" id="4_t1ppi"]
+[ext_resource type="Script" uid="uid://ccube3o7akv8e" path="res://editor/scripts/ui/bg.gd" id="5_ac7lo"]
+[ext_resource type="PackedScene" uid="uid://puh2yf2cadp3" path="res://runtime/ingame_objects/enemies/enemy_type_3.tscn" id="5_vk3op"]
+[ext_resource type="Texture2D" uid="uid://rm8el386nhdu" path="res://editor/ui/sprites/crosshair.png" id="6_ac7lo"]
+[ext_resource type="PackedScene" uid="uid://chj4xaekhs4t3" path="res://runtime/ingame_objects/enemies/enemy_type_4.tscn" id="6_ddfg8"]
+[ext_resource type="Script" uid="uid://do41r5v326q7q" path="res://editor/scripts/new/ui_root.gd" id="6_sroow"]
+[ext_resource type="Script" uid="uid://dkgiucrw0y37n" path="res://editor/scripts/new/left_container.gd" id="7_e8xin"]
+[ext_resource type="PackedScene" uid="uid://yxgoqju25htg" path="res://runtime/ingame_objects/enemies/enemy_type_5.tscn" id="7_ufmd5"]
+[ext_resource type="PackedScene" uid="uid://bysk8lga4pa5h" path="res://runtime/ingame_objects/enemies/enemy_type_6.tscn" id="8_su4ig"]
+[ext_resource type="PackedScene" uid="uid://dn2tt4hp6xrdq" path="res://runtime/ingame_objects/enemies/enemy_type_7.tscn" id="9_oqkux"]
+[ext_resource type="Texture2D" uid="uid://ms36p8dvltwg" path="res://editor/ui/sprites/space_ships_edit.png" id="9_sroow"]
+[ext_resource type="Texture2D" uid="uid://dvu2vc4h8xjet" path="res://editor/ui/sprites/AnimatedSprite2D.svg" id="10_1ge5v"]
+[ext_resource type="Script" uid="uid://fnidmb0poqwm" path="res://editor/scripts/new/right_container.gd" id="10_ed1h1"]
+[ext_resource type="PackedScene" uid="uid://cafuy7u335epb" path="res://runtime/ingame_objects/enemies/enemy_type_8.tscn" id="10_lrqpd"]
+[ext_resource type="PackedScene" uid="uid://duunc27svd5mc" path="res://runtime/ingame_objects/enemies/enemy_type_9.tscn" id="11_2f16o"]
+[ext_resource type="Script" uid="uid://btmf6lmvowstt" path="res://editor/scripts/new/center_top_container.gd" id="11_prk6r"]
+[ext_resource type="Script" uid="uid://ctbmjnk0l5e06" path="res://editor/scripts/new/new_lavel.gd" id="12_e8xin"]
+[ext_resource type="Script" uid="uid://db8o6vweeqohq" path="res://editor/scripts/new/dialogs_and_windows.gd" id="14_bbpnp"]
+[ext_resource type="Texture2D" uid="uid://bnupqya18rn2k" path="res://editor/ui/sprites/New.svg" id="14_blpq0"]
+[ext_resource type="Texture2D" uid="uid://bkrx568sr6ge2" path="res://editor/ui/sprites/Sky.svg" id="14_ewxhu"]
+[ext_resource type="Texture2D" uid="uid://dr1c51c8ya8di" path="res://editor/ui/sprites/PhysicalBone2D.svg" id="14_smycq"]
+[ext_resource type="Script" uid="uid://b2a0m2rgsogal" path="res://editor/scripts/new/open_file_dialog.gd" id="15_7nv5l"]
+[ext_resource type="Texture2D" uid="uid://dh1csfxhhbgw1" path="res://editor/ui/sprites/Load.svg" id="15_661rl"]
+[ext_resource type="Texture2D" uid="uid://fb4mctqnf3sh" path="res://editor/ui/sprites/Save.svg" id="16_661rl"]
+[ext_resource type="Script" uid="uid://6tmbo5qf3lhm" path="res://editor/scripts/new/save_file_dialog.gd" id="16_raqo2"]
+[ext_resource type="Script" uid="uid://dxejua6frggcx" path="res://editor/scripts/new/quit_popup.gd" id="17_raqo2"]
+[ext_resource type="Texture2D" uid="uid://lnrl4ks2288e" path="res://editor/ui/sprites/Close.svg" id="17_yusiu"]
+[ext_resource type="Script" uid="uid://enfihuxjtjxw" path="res://editor/scripts/ui/enemy_editor.gd" id="18_as4o3"]
+[ext_resource type="Texture2D" uid="uid://cr67et23lvk5n" path="res://editor/ui/sprites/Edit.svg" id="18_yusiu"]
+[ext_resource type="Script" uid="uid://b0qp6dhx453kp" path="res://editor/scripts/ui/create_new_enemy_dialog.gd" id="22_3m5b4"]
+[ext_resource type="Script" uid="uid://tvju8mm3o38g" path="res://editor/scripts/ui/grid_editor.gd" id="23_awj7n"]
+[ext_resource type="Script" uid="uid://bjblt33a7cfl1" path="res://editor/scripts/ui/standart_symbols_container.gd" id="24_2ebsf"]
+[ext_resource type="Script" uid="uid://ck7dhg4xdh31k" path="res://addons/altarxian_core/runtime/resources/powerup_resource.gd" id="24_awj7n"]
+[ext_resource type="Resource" uid="uid://b0m40ctlsi5ps" path="res://runtime/ingame_objects/power_ups/res/hpup.tres" id="25_2ebsf"]
+[ext_resource type="Script" uid="uid://baoblnlnvqifm" path="res://editor/scripts/ui/extended_symbols_container.gd" id="25_8c1u8"]
+[ext_resource type="Resource" uid="uid://vmai1ik18enw" path="res://runtime/ingame_objects/power_ups/res/speedup.tres" id="26_8c1u8"]
+[ext_resource type="Resource" uid="uid://dbesg4wenc41t" path="res://runtime/ingame_objects/power_ups/res/shoot_speed_up.tres" id="27_x25ii"]
+[ext_resource type="Resource" uid="uid://cnlqjjcovbsrm" path="res://runtime/ingame_objects/power_ups/res/shield.tres" id="28_x25ii"]
+[ext_resource type="Texture2D" uid="uid://iw5ovtxbl0v2" path="res://editor/ui/sprites/Add.svg" id="29_1mpi0"]
+[ext_resource type="Resource" uid="uid://sjlo1u82an40" path="res://runtime/ingame_objects/power_ups/res/continue.tres" id="29_dhw2l"]
+[ext_resource type="Resource" uid="uid://ch3po6d4mx0p2" path="res://runtime/ingame_objects/power_ups/res/shoot_power_up.tres" id="30_3l4wg"]
+[ext_resource type="Texture2D" uid="uid://l8fm48fxuli3" path="res://editor/ui/sprites/Reload.svg" id="30_agrsp"]
+
+[sub_resource type="Curve2D" id="Curve2D_u7kre"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 219, -34, 0, 0, 0, 0, 1063, -34)
+}
+point_count = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6tmre"]
+noise_type = 0
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yaehf"]
+noise = SubResource("FastNoiseLite_6tmre")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_74xuh"]
+shader = ExtResource("4_m68dc")
+shader_parameter/res = Vector2(1280, 720)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_yaehf")
+shader_parameter/density = 40.0
+shader_parameter/layers = 4
+shader_parameter/star_radius = 0.09999999776481
+shader_parameter/jitter = 0.62999998591824
+shader_parameter/threshold = 0.78
+shader_parameter/speed_x = 0.0
+shader_parameter/speed_y = -50.0
+shader_parameter/speed_scale = 10.000000149012
+shader_parameter/color_near = Color(1, 0.96, 0.9, 1)
+shader_parameter/color_far = Color(0.75, 0.85, 1, 1)
+shader_parameter/global_brightness = 1.0
+shader_parameter/use_alpha = true
+shader_parameter/rare_chance = 0.029999999241
+shader_parameter/rare_size = 0.00999999977648
+shader_parameter/rare_brightness = 0.30000000447036
+shader_parameter/rare_color = Color(1, 0.98, 0.92, 1)
+shader_parameter/rare_jitter = 0.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_yaehf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_sroow"]
+width = 1280
+height = 720
+noise = SubResource("FastNoiseLite_yaehf")
+
+[sub_resource type="Theme" id="Theme_tdjuo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_as4o3"]
+bg_color = Color(0.2, 0.2, 0.2, 0.941176)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x25ii"]
+bg_color = Color(0.2, 0.2, 0.2, 0.941176)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_size = 5
+shadow_offset = Vector2(5, 5)
+
+[node name="GameRoot" type="Node2D"]
+script = ExtResource("1_up5aq")
+
+[node name="EnemiesContainer" type="Node2D" parent="."]
+
+[node name="LevelManager" type="Node2D" parent="."]
+script = ExtResource("1_vwwou")
+enemy_scenes = Dictionary[String, PackedScene]({
+"0": ExtResource("3_33xkv"),
+"1": ExtResource("4_t1ppi"),
+"2": ExtResource("5_vk3op"),
+"3": ExtResource("6_ddfg8"),
+"4": ExtResource("7_ufmd5"),
+"5": ExtResource("8_su4ig"),
+"6": ExtResource("9_oqkux"),
+"7": ExtResource("10_lrqpd"),
+"8": ExtResource("11_2f16o")
+})
+metadata/_custom_type_script = "uid://4nbcef7oh41n"
+
+[node name="ScreenBorders" type="Node2D" parent="."]
+visible = false
+script = ExtResource("2_13c7j")
+left_offset = 100.0
+right_offset = -100.0
+border_thickness = 200.0
+metadata/_custom_type_script = "uid://23pk1msg50ab"
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_u7kre")
+script = ExtResource("3_tdjuo")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(219, -34)
+
+[node name="bg" type="Sprite2D" parent="."]
+visible = false
+material = SubResource("ShaderMaterial_74xuh")
+texture = SubResource("NoiseTexture2D_sroow")
+centered = false
+script = ExtResource("5_ac7lo")
+
+[node name="UIRoot" type="CanvasLayer" parent="."]
+script = ExtResource("6_sroow")
+
+[node name="LeftContainer" type="MarginContainer" parent="UIRoot"]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+script = ExtResource("7_e8xin")
+
+[node name="Panel" type="Panel" parent="UIRoot/LeftContainer"]
+layout_mode = 2
+
+[node name="MContainer" type="MarginContainer" parent="UIRoot/LeftContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="LeftVBoxContainer" type="VBoxContainer" parent="UIRoot/LeftContainer/Panel/MContainer"]
+layout_mode = 2
+theme = SubResource("Theme_tdjuo")
+
+[node name="lvlNameLabel" type="Label" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "Map_name"
+autowrap_mode = 3
+
+[node name="movement_speed" type="Label" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "movement_speed"
+autowrap_mode = 3
+
+[node name="shift_down_speed" type="Label" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "shift_down_speed"
+autowrap_mode = 3
+
+[node name="start_y" type="Label" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 24)
+layout_mode = 2
+text = "start_y"
+autowrap_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+layout_mode = 2
+
+[node name="MoveFormationTaggle" type="CheckButton" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Move formation"
+icon = ExtResource("10_1ge5v")
+
+[node name="PanelContainer" type="PanelContainer" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="movement_speed_control_lable" type="Label" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Side Speed : "
+
+[node name="movement_speed_slider" type="HSlider" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PanelContainer2" type="PanelContainer" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer2"]
+layout_mode = 2
+
+[node name="down_movement_speed_control_lable" type="Label" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Down Speed : "
+
+[node name="down_movement_speed_slider" type="HSlider" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer2/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 10.0
+step = 0.5
+
+[node name="PanelContainer3" type="PanelContainer" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer3"]
+layout_mode = 2
+
+[node name="Edit formation" type="Button" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Edit formation"
+icon = ExtResource("6_ac7lo")
+expand_icon = true
+
+[node name="PanelContainer4" type="PanelContainer" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer4"]
+layout_mode = 2
+
+[node name="Edit enemies" type="Button" parent="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer4/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Edit enemies"
+icon = ExtResource("9_sroow")
+expand_icon = true
+
+[node name="RightContainer" type="MarginContainer" parent="UIRoot"]
+custom_minimum_size = Vector2(200, 0)
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+script = ExtResource("10_ed1h1")
+
+[node name="Panel" type="Panel" parent="UIRoot/RightContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/RightContainer/Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/RightContainer/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="PowerUpRain" type="CheckButton" parent="UIRoot/RightContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Power Up Rain"
+icon = ExtResource("14_smycq")
+
+[node name="InGameBGOnOff" type="CheckButton" parent="UIRoot/RightContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "Background"
+icon = ExtResource("14_ewxhu")
+
+[node name="CenterTopContainer" type="MarginContainer" parent="UIRoot"]
+custom_minimum_size = Vector2(880, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+script = ExtResource("11_prk6r")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/CenterTopContainer"]
+layout_mode = 2
+
+[node name="New" type="Button" parent="UIRoot/CenterTopContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "New"
+icon = ExtResource("14_blpq0")
+
+[node name="Open" type="Button" parent="UIRoot/CenterTopContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Open"
+icon = ExtResource("15_661rl")
+
+[node name="Save" type="Button" parent="UIRoot/CenterTopContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Save"
+icon = ExtResource("16_661rl")
+
+[node name="Quit" type="Button" parent="UIRoot/CenterTopContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+text = "Quit"
+icon = ExtResource("17_yusiu")
+
+[node name="Label" type="Label" parent="UIRoot/CenterTopContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 4
+theme_override_constants/shadow_outline_size = 7
+theme_override_font_sizes/font_size = 48
+text = "LevelMmanager2"
+horizontal_alignment = 1
+
+[node name="DialogsAndWindows" type="Node" parent="UIRoot" node_paths=PackedStringArray("enemies_editor_container", "formation_editor_container")]
+script = ExtResource("14_bbpnp")
+enemies_editor_container = NodePath("EnemiesEditor")
+formation_editor_container = NodePath("FormationEditor")
+
+[node name="NewLavel" type="AcceptDialog" parent="UIRoot/DialogsAndWindows"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "New lavel"
+initial_position = 1
+size = Vector2i(600, 400)
+exclusive = false
+unresizable = true
+always_on_top = true
+popup_window = true
+script = ExtResource("12_e8xin")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/DialogsAndWindows/NewLavel"]
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 591.0
+offset_bottom = 357.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/NewLavel/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxLeft" type="VBoxContainer" parent="UIRoot/DialogsAndWindows/NewLavel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="UIRoot/DialogsAndWindows/NewLavel/MarginContainer/HBoxContainer/VBoxLeft"]
+layout_mode = 2
+text = "Enter level name :"
+
+[node name="LineEdit" type="LineEdit" parent="UIRoot/DialogsAndWindows/NewLavel/MarginContainer/HBoxContainer/VBoxLeft"]
+layout_mode = 2
+max_length = 25
+emoji_menu_enabled = false
+right_icon = ExtResource("18_yusiu")
+
+[node name="VBoxRight" type="VBoxContainer" parent="UIRoot/DialogsAndWindows/NewLavel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OpenFileDialog" type="FileDialog" parent="UIRoot/DialogsAndWindows"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 2
+unresizable = true
+always_on_top = true
+file_mode = 0
+display_mode = 1
+access = 2
+hidden_files_toggle_enabled = false
+file_filter_toggle_enabled = false
+folder_creation_enabled = false
+favorites_enabled = false
+recent_list_enabled = false
+layout_toggle_enabled = false
+script = ExtResource("15_7nv5l")
+
+[node name="SaveFileDialog" type="FileDialog" parent="UIRoot/DialogsAndWindows"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 2
+always_on_top = true
+display_mode = 1
+access = 2
+hidden_files_toggle_enabled = false
+file_filter_toggle_enabled = false
+folder_creation_enabled = false
+favorites_enabled = false
+recent_list_enabled = false
+script = ExtResource("16_raqo2")
+
+[node name="QuitPopup" type="Popup" parent="UIRoot/DialogsAndWindows"]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Quit editor?"
+initial_position = 2
+size = Vector2i(372, 100)
+borderless = false
+script = ExtResource("17_raqo2")
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/DialogsAndWindows/QuitPopup"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="Label" type="Label" parent="UIRoot/DialogsAndWindows/QuitPopup/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 32
+text = "Any unsaved progress may be lost. 
+Are you sure you want to quit?"
+horizontal_alignment = 1
+
+[node name="Ok" type="Button" parent="UIRoot/DialogsAndWindows/QuitPopup/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "Ok"
+
+[node name="Cancel" type="Button" parent="UIRoot/DialogsAndWindows/QuitPopup/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "Cancel"
+
+[node name="EnemiesEditor" type="MarginContainer" parent="UIRoot/DialogsAndWindows"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(880, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("18_as4o3")
+
+[node name="Panel" type="Panel" parent="UIRoot/DialogsAndWindows/EnemiesEditor"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_as4o3")
+
+[node name="MainTabContainer" type="TabContainer" parent="UIRoot/DialogsAndWindows/EnemiesEditor/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="FormationEditor" type="MarginContainer" parent="UIRoot/DialogsAndWindows"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(880, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -440.0
+offset_top = -300.0
+offset_right = 440.0
+offset_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+script = ExtResource("23_awj7n")
+
+[node name="Panel" type="Panel" parent="UIRoot/DialogsAndWindows/FormationEditor"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x25ii")
+
+[node name="GridEditor" type="VBoxContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 870.0
+offset_bottom = 590.0
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainer"]
+layout_mode = 2
+
+[node name="AddRowButton" type="Button" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Row"
+icon = ExtResource("29_1mpi0")
+
+[node name="AddFilledRowButton" type="Button" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Filled row "
+icon = ExtResource("29_1mpi0")
+
+[node name="RefreshButton" type="Button" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Refresh"
+icon = ExtResource("30_agrsp")
+
+[node name="GridContainer" type="GridContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="MarginContainerSymbol" type="MarginContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 3
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainerSymbol"]
+layout_mode = 2
+
+[node name="StandartSymbolsContainer" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainerSymbol/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 5
+script = ExtResource("24_2ebsf")
+
+[node name="ExtendedSymbolsContainer" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainerSymbol/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+script = ExtResource("25_8c1u8")
+
+[node name="MarginContainerRow" type="MarginContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainerRow"]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="RowControlsContainer" type="VBoxContainer" parent="UIRoot/DialogsAndWindows/FormationEditor/Panel/GridEditor/MarginContainerRow/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="NewEnemyDialog" type="ConfirmationDialog" parent="UIRoot/DialogsAndWindows"]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(277, 208)
+script = ExtResource("22_3m5b4")
+available_powerups = Array[ExtResource("24_awj7n")]([ExtResource("25_2ebsf"), ExtResource("26_8c1u8"), ExtResource("27_x25ii"), ExtResource("28_x25ii"), ExtResource("29_dhw2l"), ExtResource("30_3l4wg")])
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog"]
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 268.0
+offset_bottom = 165.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 14
+
+[node name="NewSymbolLabel" type="Label" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Enemy: %s "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Health: 0"
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ButtonHpM" type="Button" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "-"
+
+[node name="ButtonHpP" type="Button" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+text = "+"
+
+[node name="LabelHP" type="Label" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Amount : "
+
+[node name="HOptionButton" type="OptionButton" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "5"
+popup/item_1/id = 1
+popup/item_2/text = "10"
+popup/item_2/id = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Points: 0 "
+
+[node name="MarginContainer" type="MarginContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ButtonPM" type="Button" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+text = "-"
+
+[node name="ButtonPP" type="Button" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+text = "+"
+
+[node name="LabelPoint" type="Label" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Amount : "
+
+[node name="POptionButton" type="OptionButton" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "5"
+popup/item_1/id = 1
+popup/item_2/text = "10"
+popup/item_2/id = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "PowerUP:"
+
+[node name="OptionButton" type="OptionButton" parent="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+
+[connection signal="toggled" from="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/MoveFormationTaggle" to="UIRoot/LeftContainer" method="_on_move_formation_taggle_toggled"]
+[connection signal="value_changed" from="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer/VBoxContainer/movement_speed_slider" to="UIRoot/LeftContainer" method="_on_movement_speed_slider_value_changed"]
+[connection signal="value_changed" from="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer2/VBoxContainer/down_movement_speed_slider" to="UIRoot/LeftContainer" method="_on_down_movement_speed_slider_value_changed"]
+[connection signal="pressed" from="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer3/VBoxContainer/Edit formation" to="UIRoot/LeftContainer" method="_on_edit_formation_pressed"]
+[connection signal="pressed" from="UIRoot/LeftContainer/Panel/MContainer/LeftVBoxContainer/PanelContainer4/VBoxContainer/Edit enemies" to="UIRoot/LeftContainer" method="_on_edit_enemies_pressed"]
+[connection signal="toggled" from="UIRoot/RightContainer/Panel/MarginContainer/VBoxContainer/InGameBGOnOff" to="bg" method="_on_in_game_bg_on_off_toggled"]
+[connection signal="pressed" from="UIRoot/CenterTopContainer/HBoxContainer/New" to="UIRoot/CenterTopContainer" method="_on_new_pressed"]
+[connection signal="pressed" from="UIRoot/CenterTopContainer/HBoxContainer/Open" to="UIRoot/CenterTopContainer" method="_on_open_pressed"]
+[connection signal="pressed" from="UIRoot/CenterTopContainer/HBoxContainer/Save" to="UIRoot/CenterTopContainer" method="_on_save_pressed"]
+[connection signal="pressed" from="UIRoot/CenterTopContainer/HBoxContainer/Quit" to="UIRoot/CenterTopContainer" method="_on_quit_pressed"]
+[connection signal="file_selected" from="UIRoot/DialogsAndWindows/OpenFileDialog" to="UIRoot/DialogsAndWindows/OpenFileDialog" method="_on_file_selected"]
+[connection signal="file_selected" from="UIRoot/DialogsAndWindows/SaveFileDialog" to="UIRoot/DialogsAndWindows/SaveFileDialog" method="_on_file_selected"]
+[connection signal="pressed" from="UIRoot/DialogsAndWindows/QuitPopup/MarginContainer/Ok" to="UIRoot/DialogsAndWindows/QuitPopup" method="_on_ok_pressed"]
+[connection signal="pressed" from="UIRoot/DialogsAndWindows/QuitPopup/MarginContainer/Cancel" to="UIRoot/DialogsAndWindows/QuitPopup" method="_on_cancel_pressed"]
+[connection signal="draw" from="UIRoot/DialogsAndWindows/FormationEditor" to="UIRoot/DialogsAndWindows/FormationEditor" method="_on_draw"]
+[connection signal="confirmed" from="UIRoot/DialogsAndWindows/NewEnemyDialog" to="UIRoot/DialogsAndWindows/NewEnemyDialog" method="_on_confirmed"]
+[connection signal="pressed" from="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ButtonHpM" to="UIRoot/DialogsAndWindows/NewEnemyDialog" method="_on_button_hp_m_pressed"]
+[connection signal="pressed" from="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/ButtonHpP" to="UIRoot/DialogsAndWindows/NewEnemyDialog" method="_on_button_hp_p_pressed"]
+[connection signal="item_selected" from="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer/HOptionButton" to="UIRoot/DialogsAndWindows/NewEnemyDialog" method="_on_h_option_button_item_selected"]
+[connection signal="pressed" from="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/ButtonPM" to="UIRoot/DialogsAndWindows/NewEnemyDialog" method="_on_button_pm_pressed"]
+[connection signal="pressed" from="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/ButtonPP" to="UIRoot/DialogsAndWindows/NewEnemyDialog" method="_on_button_pp_pressed"]
+[connection signal="item_selected" from="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer/POptionButton" to="UIRoot/DialogsAndWindows/NewEnemyDialog" method="_on_p_option_button_item_selected"]
+[connection signal="item_selected" from="UIRoot/DialogsAndWindows/NewEnemyDialog/MarginContainer/VBoxContainer/HBoxContainer3/OptionButton" to="UIRoot/DialogsAndWindows/NewEnemyDialog" method="_on_option_button_item_selected"]

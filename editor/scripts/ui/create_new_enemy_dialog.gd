@@ -1,7 +1,9 @@
 extends ConfirmationDialog
 
 var letters: Array[String] = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W"]
-var formation_res: FormationResource2
+var formation_res: FormationResource
+var active_level: LevelResource
+
 
 @onready var new_symbol_label: Label = $MarginContainer/VBoxContainer/NewSymbolLabel
 @onready var option_button: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer3/OptionButton
@@ -24,7 +26,8 @@ func _ready() -> void:
 		var id = PowerupResource.PowerupType[key]
 		option_button.add_item(key.capitalize(), id)
 
-func setup(formation: FormationResource2, context: Dictionary) -> void:
+
+func setup(formation: FormationResource, context: Dictionary) -> void:
 	base_enemy_id = context['enemy_id']
 	formation_res = formation
 	new_symbol =  get_available_symbol() # <- получаем новый симворл
@@ -32,6 +35,7 @@ func setup(formation: FormationResource2, context: Dictionary) -> void:
 	var enemy = Resources.enemy_description[base_enemy_id]
 	current_hp_amount = enemy["base_hp"] # <- получаем базовые хп
 	current_p_amount = enemy["base_point"] # <- получаем базовые очки
+
 
 func _process(_delta: float) -> void:
 	labelHP.text = "Health: %s " %  str(current_hp_amount)
@@ -43,9 +47,10 @@ func get_available_symbol() -> String:
 			return s
 	return "No available symble"
 
-func _on_request_create_new_enemy_dialog(formation: FormationResource2, context: Dictionary):
+
+func _on_request_create_new_enemy_dialog(formation: FormationResource, context: Dictionary):
 	setup(formation,context)
-	show()
+	popup()
 
 
 func _on_h_option_button_item_selected(index: int) -> void:
@@ -83,17 +88,7 @@ func _on_option_button_item_selected(index: int) -> void:
 		selected_powerup = available_powerups[index-1]
 
 func _on_confirmed() -> void:
-	# видимо самое простое будет создовать прям сруз всё оверрайды исходя из наминалов базы
-	# а потом докидывать powerup #
 	var new_enemy_override = EnemyOverrideResource.new()
-
-	#@export var enemy_id: String = "0"
-	#@export var enemy_overrided_id: String = "A"
-	#@export var health: int = -1
-	#@export var points: int = -1
-	#@export var self_name: String = ""
-	#@export var powerup: PowerupResource
-
 	new_enemy_override.enemy_id = base_enemy_id
 	new_enemy_override.enemy_overrided_id = new_symbol
 	new_enemy_override.powerup = selected_powerup
@@ -103,6 +98,7 @@ func _on_confirmed() -> void:
 	formation_res.enemy_overrides.append(new_enemy_override)
 
 	UiSignalBus.emit_enemy_editor_refrehs(formation_res)
-	if current_hp_amount == 0: 
-		print("warning")
-	pass # Replace with function body.
+	print('[NewEnemyDialog] -> _on_confirmed()')
+
+func _on_level_updated(level: LevelResource):
+	active_level = level

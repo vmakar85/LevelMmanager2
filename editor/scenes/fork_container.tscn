@@ -6,6 +6,11 @@
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [node name="ForkContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
@@ -26,5 +31,8 @@ offset_right = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ForkContainer" type="VBoxContainer" parent="ForkPanel/ForkScrollContainer"]
+[node name="FlowContainer" type="FlowContainer" parent="ForkPanel/ForkScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1

@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://cx85mcv4alstb"]
+[gd_scene load_steps=30 format=3 uid="uid://cx85mcv4alstb"]
 
 [ext_resource type="Script" uid="uid://k1isg5n2xfky" path="res://editor/scripts/main.gd" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://4nbcef7oh41n" path="res://addons/altarxian_core/runtime/managers/level_manager.gd" id="2_2cqfq"]
 [ext_resource type="Script" uid="uid://dmwfoldm2rbqh" path="res://editor/scripts/ui/ui_root.gd" id="3_4c57u"]
 [ext_resource type="Texture2D" uid="uid://rm8el386nhdu" path="res://editor/ui/sprites/crosshair.png" id="3_lquwl"]
 [ext_resource type="Shader" uid="uid://dnr3mlj7g84cf" path="res://runtime/ingame_objects/world/star_field_v2.gdshader" id="4_2cqfq"]
@@ -15,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://diw1mohtu5gxl" path="res://editor/ui/sprites/space_ships_01.png" id="8_vivmo"]
 [ext_resource type="Script" uid="uid://b0qp6dhx453kp" path="res://editor/scripts/ui/create_new_enemy_dialog.gd" id="11_efxa6"]
 [ext_resource type="PackedScene" uid="uid://bu8safbwuv5v1" path="res://editor/scenes/fork_container.tscn" id="11_w48qg"]
+[ext_resource type="Script" uid="uid://ck7dhg4xdh31k" path="res://addons/altarxian_core/runtime/resources/powerup_resource.gd" id="17_074og"]
+[ext_resource type="Resource" uid="uid://b0m40ctlsi5ps" path="res://runtime/ingame_objects/power_ups/res/hpup.tres" id="18_cegan"]
 
 [sub_resource type="Curve2D" id="Curve2D_vivmo"]
 _data = {
@@ -26,14 +29,14 @@ point_count = 2
 noise_type = 0
 frequency = 1.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yaehf"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2cqfq"]
 noise = SubResource("FastNoiseLite_2cqfq")
 seamless = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yaehf"]
 shader = ExtResource("4_2cqfq")
 shader_parameter/res = Vector2(1280, 720)
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_yaehf")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_2cqfq")
 shader_parameter/density = 40.0
 shader_parameter/layers = 4
 shader_parameter/star_radius = 0.09999999776481
@@ -91,6 +94,10 @@ shadow_offset = Vector2(5, 5)
 [node name="WorldScene" type="Node2D"]
 script = ExtResource("1_0xm2m")
 
+[node name="LevelManager" type="Node2D" parent="."]
+script = ExtResource("2_2cqfq")
+metadata/_custom_type_script = "uid://4nbcef7oh41n"
+
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_vivmo")
 script = ExtResource("6_vivmo")
@@ -124,7 +131,6 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="infoPanel" type="Panel" parent="UIRoot/left/VBoxContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(3.465, 43.04)
 layout_mode = 2
 size_flags_vertical = 3
@@ -146,28 +152,24 @@ layout_mode = 2
 theme = SubResource("Theme_0xm2m")
 
 [node name="lvlNameLabel" type="Label" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 24)
 layout_mode = 2
 text = "Map_name"
 autowrap_mode = 3
 
 [node name="movement_speed" type="Label" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 24)
 layout_mode = 2
 text = "movement_speed"
 autowrap_mode = 3
 
 [node name="shift_down_speed" type="Label" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 24)
 layout_mode = 2
 text = "shift_down_speed"
 autowrap_mode = 3
 
 [node name="start_y" type="Label" parent="UIRoot/left/VBoxContainer/infoPanel/MarginContainer/VBoxContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(180, 24)
 layout_mode = 2
 text = "start_y"
@@ -177,7 +179,6 @@ autowrap_mode = 3
 layout_mode = 2
 
 [node name="ControllPanel" type="Panel" parent="UIRoot/left/VBoxContainer"]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(3.465, 43.04)
 layout_mode = 2
 size_flags_vertical = 3
@@ -209,12 +210,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="movement_speed_control_lable" type="Label" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 text = "Side Speed : "
 
 [node name="movement_speed_slider" type="HSlider" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 
 [node name="PanelContainer2" type="PanelContainer" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer"]
@@ -224,12 +223,10 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="down_movement_speed_control_lable" type="Label" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 text = "Down Speed : "
 
 [node name="down_movement_speed_slider" type="HSlider" parent="UIRoot/left/VBoxContainer/ControllPanel/MarginContainer/VBoxContainer/PanelContainer2/VBoxContainer"]
-unique_name_in_owner = true
 layout_mode = 2
 max_value = 10.0
 step = 0.5
@@ -298,7 +295,6 @@ layout_mode = 2
 text = "Background"
 
 [node name="CenterGridEditor" type="MarginContainer" parent="UIRoot"]
-unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(880, 600)
 anchors_preset = 8
@@ -398,8 +394,6 @@ unique_name_in_owner = true
 layout_mode = 2
 
 [node name="CenterEnemyEditor" type="MarginContainer" parent="UIRoot"]
-unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(880, 600)
 anchors_preset = 8
 anchor_left = 0.5
@@ -594,12 +588,13 @@ oversampling_override = 1.0
 initial_position = 1
 size = Vector2i(277, 208)
 script = ExtResource("11_efxa6")
+available_powerups = Array[ExtResource("17_074og")]([ExtResource("18_cegan")])
 
 [node name="MarginContainer" type="MarginContainer" parent="UIRoot/CreateNewEnemyDialog"]
-offset_left = 8.0
-offset_top = 8.0
-offset_right = 2208.0
-offset_bottom = 1615.0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 268.0
+offset_bottom = 165.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UIRoot/CreateNewEnemyDialog/MarginContainer"]
 layout_mode = 2

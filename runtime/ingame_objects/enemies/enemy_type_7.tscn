@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dn2tt4hp6xrdq"]
+[gd_scene load_steps=6 format=3 uid="uid://dn2tt4hp6xrdq"]
 
 [ext_resource type="Script" uid="uid://dn4ynqeoput1m" path="res://runtime/ingame_objects/enemies/scripts/enemy_type_7.gd" id="1_wo1l6"]
 [ext_resource type="Texture2D" uid="uid://565uk72cthrf" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_007_d.png" id="2_vorya"]
 [ext_resource type="Texture2D" uid="uid://b2cedcgxxxlsd" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_007_n.png" id="3_omneo"]
 [ext_resource type="Texture2D" uid="uid://dlkqsxs43mui6" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_007_s.png" id="4_64naw"]
-[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://runtime/ingame_objects/enemies/ray_component/rays.tscn" id="5_d6o65"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jxjgw"]
 diffuse_texture = ExtResource("2_vorya")
@@ -49,9 +48,6 @@ polygon = PackedVector2Array(-66, -72, -34, -36, -9, -25, 9, -25, 34, -38, 66, -
 
 [node name="GunMarker2D" type="Marker2D" parent="."]
 position = Vector2(0, -52)
-
-[node name="Rays" parent="." instance=ExtResource("5_d6o65")]
-scale = Vector2(1.9, 1.9)
 
 [connection signal="area_entered" from="enemy" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="SafeArea" to="." method="_on_safe_area_body_entered"]

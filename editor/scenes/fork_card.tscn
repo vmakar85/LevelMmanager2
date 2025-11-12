@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwf5hl17d8ceq"]
+
+[ext_resource type="Script" uid="uid://4qr0h8b4vujk" path="res://editor/scripts/new/fork_card.gd" id="1_2f7dq"]
+
+[node name="ForkCard" type="PanelContainer"]
+script = ExtResource("1_2f7dq")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Description" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/Description"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="SymbleLabel" type="Label" parent="HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+text = "BaseSymble : 0"
+
+[node name="HealthLabel" type="Label" parent="HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+text = "BaseHealthLabel : 10"
+
+[node name="PointsLabel" type="Label" parent="HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+text = "BasePointsLabel : 10"
+
+[node name="PowerupLabel" type="Label" parent="HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+
+[node name="SelfDelete" type="Button" parent="HBoxContainer/Description/VBoxContainer"]
+layout_mode = 2
+text = "SelfDelete"

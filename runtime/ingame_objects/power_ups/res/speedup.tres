@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PowerupResource" load_steps=2 format=3 uid="uid://vmai1ik18enw"]
 
-[ext_resource type="Script" uid="uid://cedgc7p8w0bo5" path="res://runtime/scripts/powerup_resource.gd" id="1_op0ls"]
+[ext_resource type="Script" uid="uid://ck7dhg4xdh31k" path="res://addons/altarxian_core/runtime/resources/powerup_resource.gd" id="1_op0ls"]
 
 [resource]
 script = ExtResource("1_op0ls")

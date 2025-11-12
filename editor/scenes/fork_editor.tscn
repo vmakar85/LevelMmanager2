@@ -1,0 +1,127 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgpaa1mi433hj"]
+
+[ext_resource type="Script" uid="uid://n3wg6vtda2pf" path="res://editor/scripts/new/fork_editor.gd" id="1_ybeo6"]
+
+[node name="ForkEditor" type="MarginContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_ybeo6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="AddNewButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Add fork"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 14
+
+[node name="NewSymbolLabel" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enemy: %s "
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Health: 0"
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="ButtonHpM" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+text = "-"
+
+[node name="ButtonHpP" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+text = "+"
+
+[node name="LabelHP" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Amount : "
+
+[node name="HOptionButton" type="OptionButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "5"
+popup/item_1/id = 1
+popup/item_2/text = "10"
+popup/item_2/id = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Points: 0 "
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="ButtonPM" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+text = "-"
+
+[node name="ButtonPP" type="Button" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(24, 0)
+layout_mode = 2
+text = "+"
+
+[node name="LabelPoint" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Amount : "
+
+[node name="POptionButton" type="OptionButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "5"
+popup/item_1/id = 1
+popup/item_2/text = "10"
+popup/item_2/id = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+text = "PowerUP:"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+z_index = 4096
+y_sort_enabled = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4

@@ -11,8 +11,10 @@ const SPEEDUP = preload("uid://bbgsd6phhl6kc")
 var is_spawn_need
 var is_waiting = false
 
+
 func _ready() -> void:
 	pass
+
 
 func _process(_delta: float) -> void:
 	if is_spawn_need and not is_waiting:
@@ -21,8 +23,10 @@ func _process(_delta: float) -> void:
 		_spawn_rain()
 		is_waiting = false
 
+
 func _on_button_toggled(toggled_on: bool) -> void:
 	is_spawn_need = toggled_on
+
 
 func _spawn_rain() -> void:
 	path_follow_2d.progress_ratio = randf()

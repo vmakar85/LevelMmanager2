@@ -1,10 +1,9 @@
-[gd_scene load_steps=22 format=3 uid="uid://puh2yf2cadp3"]
+[gd_scene load_steps=21 format=3 uid="uid://puh2yf2cadp3"]
 
 [ext_resource type="Script" uid="uid://cnc67j62bbhqv" path="res://runtime/ingame_objects/enemies/scripts/enemy_type_3.gd" id="1_30cxk"]
 [ext_resource type="Texture2D" uid="uid://dq0l6veyk2a7x" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_003_d.png" id="2_xyuqv"]
 [ext_resource type="Texture2D" uid="uid://22q37gga0xge" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_003_n.png" id="3_18uqn"]
 [ext_resource type="Texture2D" uid="uid://e0sjjfmfroog" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_003_s.png" id="4_t1led"]
-[ext_resource type="PackedScene" uid="uid://cb6vdcrdrgbix" path="res://runtime/ingame_objects/enemies/ray_component/rays.tscn" id="5_rjgbj"]
 
 [sub_resource type="Gradient" id="Gradient_e11l0"]
 offsets = PackedFloat32Array(0, 0.313158, 1)
@@ -152,9 +151,6 @@ polygon = PackedVector2Array(65, -40, 0, 0, -65, -40, -100, -105, 100, -105)
 visible = false
 rotation = 3.14159
 polygon = PackedVector2Array(-48, -42, -32, -42, -16, -32, 16, -32, 32, -42, 48, -42, 30, 26, 20, 26, 14, 42, -14, 42, -20, 26, -30, 26)
-
-[node name="Rays" parent="." instance=ExtResource("5_rjgbj")]
-scale = Vector2(1.255, 1.255)
 
 [connection signal="area_entered" from="enemy" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="SafeArea" to="." method="_on_safe_area_body_entered"]
