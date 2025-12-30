@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://bn18s78mthlea"]
+[gd_scene load_steps=7 format=3 uid="uid://bn18s78mthlea"]
 
 [ext_resource type="Script" uid="uid://bmredg7txpq4s" path="res://runtime/ingame_objects/enemies/scripts/enemy_type_1.gd" id="1_5jexf"]
 [ext_resource type="Texture2D" uid="uid://c0tftw0wrcmxh" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_001_d.png" id="2_sm7ly"]
 [ext_resource type="Texture2D" uid="uid://ivyijqro6u2e" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_001_n.png" id="3_sueu2"]
 [ext_resource type="Texture2D" uid="uid://bp01l6jtr8vxu" path="res://runtime/ingame_objects/enemies/enemy_sprites/spaceShips_001_s.png" id="4_hjud6"]
+[ext_resource type="Script" uid="uid://c0b7j1gw7w16x" path="res://addons/altarxian_core/runtime/components/rays.gd" id="5_v8vj2"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_d4q77"]
 diffuse_texture = ExtResource("2_sm7ly")
@@ -47,6 +48,18 @@ polygon = PackedVector2Array(-42, -30, -14, -36, -9, -25, 9, -25, 14, -36, 40, -
 
 [node name="GunMarker2D" type="Marker2D" parent="."]
 position = Vector2(0, -32)
+
+[node name="FormationRays" type="Node2D" parent="." node_paths=PackedStringArray("ray_left", "ray_right")]
+script = ExtResource("5_v8vj2")
+ray_left = NodePath("RayCastLeft")
+ray_right = NodePath("RayCastRight")
+metadata/_custom_type_script = "uid://c0b7j1gw7w16x"
+
+[node name="RayCastLeft" type="RayCast2D" parent="FormationRays"]
+target_position = Vector2(-60, 0)
+
+[node name="RayCastRight" type="RayCast2D" parent="FormationRays"]
+target_position = Vector2(60, 0)
 
 [connection signal="area_entered" from="enemy" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="SafeArea" to="." method="_on_safe_area_body_entered"]
